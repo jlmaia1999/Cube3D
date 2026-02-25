@@ -12,6 +12,25 @@
 # define ERR_MAP_EXT "Error\nInvalid map file extension\n"
 # define ERR_MAP_OPEN "Error\nUnable to open map file\n"
 
+typedef struct s_map
+{
+	char **map;
+}	t_map;
+
+typedef struct s_textures
+{
+	char	*n_texture;
+	char	*s_texture;
+	char	*w_texture;
+	char	*e_texture;
+	int		floor_hex;
+	int		ceiling_hex;
+}	t_textures;
+
+typedef struct s_master
+{
+
+}	t_master;
 
 void	error_exit(char *error);
 int		map_ext_check(char *av);
