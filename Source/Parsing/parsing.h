@@ -11,6 +11,7 @@
 # define ERR_ARGS "Error\nToo many arguments provided\n"
 # define ERR_MAP_EXT "Error\nInvalid map file extension\n"
 # define ERR_MAP_OPEN "Error\nUnable to open map file\n"
+# define ERR_MAP_EMPTY "Error\nMap file is empty\n"
 
 typedef struct s_map
 {
@@ -29,10 +30,16 @@ typedef struct s_textures
 
 typedef struct s_master
 {
-
+	t_map		*map;
+	t_textures	*textures;
 }	t_master;
 
 void	error_exit(char *error);
 int		map_ext_check(char *av);
+void	clean_n_exit(t_master **master);
+void	free_array(char **s);
+void		check_and_store_map(int fd, t_master *master);
+int	sv_map(int fd, t_master *master);
+
 
 #endif

@@ -10,8 +10,10 @@ PRINTF_DIR = Resources//ft_printf
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 SRCS = $(PARSE_DIR)/main.c \
-       $(PARSE_DIR)/parsing.c \
-       $(PARSE_DIR)/parsing_error.c
+		$(PARSE_DIR)/parsing.c \
+		$(PARSE_DIR)/parsing_error.c\
+		$(PARSE_DIR)/map_reader.c\
+
 
 OBJS = $(SRCS:.c=.o)
 
