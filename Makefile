@@ -4,9 +4,8 @@ MINILIBX_DIR = ./lib/minilibx-linux
 LIBFT = $(LIBFT_DIR)/libft.a
 MINILIBX =$(MINILIBX_DIR)/libmlx.a
 
-MAIN = srcs/main.c
+MAIN = Sources/main_exec.c
 
-SRCS = srcs/map_parsing.c srcs/create_game.c srcs/map_validation.c srcs/utils.c srcs/error_handler.c srcs/init_window.c srcs/movement.c
 
 OBJS = $(SRCS:.c=.o)
 
