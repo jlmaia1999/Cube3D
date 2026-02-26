@@ -25,12 +25,49 @@ void	init_map(t_game *game)
 	}
 	game->map.map[2][2] = '1';
 	game->map.map[2][3] = '1';
-	game->map.map[5][5] = 'P';
+	game->map.map[5][5] = '1';
+}
+
+void	draw_tile(t_game *game, int tile_x, int tile_y, int color)
+{
+	int y;
+	int x;
+
+	y = 0;
+	x = 0;
+	while (y < 63)
+	{
+		x = 0;
+		while (x < 63)
+		{
+			mlx_pixel_put(game->mlx, game->win, x + (tile_x *64) , y + (tile_y*64), color);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	draw_map(t_game *game)
 {
+	int	y;
+	int	x;
 
+	y = 0;
+	x = 0;
+	while (y < game->map.height)
+	{
+		x = 0;
+		while (x < game->map.width)
+		{
+			// draw_tile(game, x, y, 0x808080);
+			if (game->map.map[y][x] == '1')
+				draw_tile(game, x, y, 0xFFFFFF);
+			else
+				draw_tile(game, x, y, 0x808080);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	init_window(t_game *game)
