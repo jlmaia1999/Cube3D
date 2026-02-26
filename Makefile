@@ -6,6 +6,7 @@ MINILIBX =$(MINILIBX_DIR)/libmlx.a
 
 MAIN = Sources/main_exec.c
 
+SRCS = Sources/player.c
 
 OBJS = $(SRCS:.c=.o)
 
