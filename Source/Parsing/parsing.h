@@ -17,6 +17,7 @@
 
 typedef struct s_map
 {
+	char **file;
 	char **map;
 }	t_map;
 
@@ -41,7 +42,8 @@ int		map_ext_check(char *av);
 void	clean_n_exit(t_master **master);
 void	free_array(char **s);
 void		check_and_store_map(int fd, t_master *master);
-int	sv_map(int fd, t_master *master);
+int	sv_file(int fd, t_master *master);
+void	extract_textures(t_master *master);
 
 
 #endif

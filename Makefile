@@ -13,6 +13,7 @@ SRCS = $(PARSE_DIR)/main.c \
 		$(PARSE_DIR)/parsing.c \
 		$(PARSE_DIR)/parsing_error.c\
 		$(PARSE_DIR)/map_reader.c\
+		$(PARSE_DIR)/extractor.c
 
 
 OBJS = $(SRCS:.c=.o)
