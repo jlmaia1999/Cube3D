@@ -1,5 +1,35 @@
 #include "parsing.h"
 
+int	check_map_cut(char *file)
+{
+	int in_map;
+	int i;
+
+	in_map = 0;
+	i = 0;
+	while (file[i])
+	{
+		if (file[i] == '\n' && (file[i + 1] == '1' || file[i + 1] == ' '))
+			in_map = 1;
+		if (in_map == 1)
+		{
+			while (file[i])
+			{
+				if (file[i] == '\n' && (file[i - 1] == '1' || file[i - 1] == ' '))
+				{
+					if (file[i + 1] != '1' && file[i + 1] != ' ')
+						return (ft_putstr_fd (ERR_MAP_SHAPE, 2), 1);
+				}
+				i++;
+				// printf ("sou a letra n %d\n", i);
+			}
+		}
+		if (file [i])
+			i++;
+	}
+	return (0);
+}
+
 int	sv_map(int fd, t_master *master)
 {
 	char *line;
@@ -18,7 +48,8 @@ int	sv_map(int fd, t_master *master)
 		free (line);
 		line = get_next_line(fd);
 	}
-	check_map_cut();
+	if (check_map_cut(map_cpy))
+		return (1);
 	master->map->map = ft_split(map_cpy, '\n');
 	free (line);
 	free (map_cpy);

@@ -12,6 +12,8 @@
 # define ERR_MAP_EXT "Error\nInvalid map file extension\n"
 # define ERR_MAP_OPEN "Error\nUnable to open map file\n"
 # define ERR_MAP_EMPTY "Error\nMap file is empty\n"
+# define ERR_MAP_SHAPE "Error\nMap shape is invalid\n"
+
 
 typedef struct s_map
 {
