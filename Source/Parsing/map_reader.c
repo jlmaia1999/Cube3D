@@ -71,20 +71,22 @@ void	check_and_store_map(int fd, t_master *master)
 {
 	if (sv_file(fd, master))
 		clean_n_exit(&master);
-	extract_textures(master);
-	printf("%s\n", master->textures->n_texture);
-	printf("%s\n", master->textures->s_texture);
-	printf("%s\n", master->textures->w_texture);
-	printf("%s\n", master->textures->e_texture);
-	printf("%X\n", master->textures->floor_hex);
-	printf("%X\n", master->textures->ceiling_hex);
-
-	// extract_map (master);
-	
+	if (extract_textures(master))
+		clean_n_exit(&master);
+	// if (parse_textures(master))
+	// 	clean_n_exit(&master);
+	if (map_extractor (master))
+		clean_n_exit(&master);
+	// printf("%s\n", master->textures->n_texture);
+	// printf("%s\n", master->textures->s_texture);
+	// printf("%s\n", master->textures->w_texture);
+	// printf("%s\n", master->textures->e_texture);
+	// printf("%X\n", master->textures->floor_hex);
+	// printf("%X\n", master->textures->ceiling_hex);
 	int i = 0;
-	while (master->map->file[i])
+	while (master->map->map[i])
 	{
-		printf("%s\n", master->map->file[i]);
+		printf("%s\n", master->map->map[i]);
 		i++;
 	}
 }

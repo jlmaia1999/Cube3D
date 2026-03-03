@@ -24,6 +24,8 @@ void	master_init(t_master **master)
 		perror("Mem_aloc Error: ");
 		exit (1);
 	}
+	(*master)->textures->ceiling_hex = -2;
+	(*master)->textures->floor_hex = -2;
 }
 
 int	main(int ac, char **av)
@@ -38,7 +40,7 @@ int	main(int ac, char **av)
 	if (map_ext_check(av[1]))
 		error_exit(ERR_MAP_EXT);
 	if ((fd = open (av[1], O_RDONLY)) < 0)
-		error_exit(ERR_MAP_OPEN);
+		error_exit(ERR_FILE_OPEN);
 	master_init(&master);
 	check_and_store_map(fd, master);
 	close (fd);
