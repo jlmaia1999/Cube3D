@@ -49,6 +49,8 @@ int	sv_hex(char *texture, int *dir)
 	char **rgb;
 
 	i = 0;
+	if (*dir > 0)
+		return (1);
 	while (texture[i] != ' ')
 		i++;
 	if (!texture[i])
@@ -60,26 +62,30 @@ int	sv_hex(char *texture, int *dir)
 	rgb = ft_split (&texture[i], ',');
 	*dir = rgb_to_hex(rgb);
 	if (*dir == -1)
-		return (1);
+		return (0);
 	free_array (rgb);
 	return (0);
 }
 
-void	sv_texture(char *texture, char **dir)
+int	sv_texture(char *texture, char **path)
 {
 	int i;
 
 	i = 0;
-	while (texture[i] != ' ')
-		i++;
-	if (!texture[i])
-		return ;
-	while (texture[i] == ' ')
-		i++;
-	if (!texture[i])
-		return ;
-	*dir = ft_substr (texture, i, ft_strlen(texture));
-	return ;
+	if (*path == NULL)
+	{
+		while (texture[i] != ' ')
+			i++;
+		if (!texture[i])
+			return (0);
+		while (texture[i] == ' ')
+			i++;
+		if (!texture[i])
+			return (0);
+		*path = ft_substr (texture, i, ft_strlen(texture));
+		return (0);
+	}
+	return (1);
 }
 
 int	extract_textures(t_master *master)
@@ -90,17 +96,23 @@ int	extract_textures(t_master *master)
 	while (master->map->file[i])
 	{
 		if (master->map->file[i][0] == 'N' && master->map->file[i][1] == 'O')
-			sv_texture(master->map->file[i], &master->textures->n_texture);
+			if (sv_texture(master->map->file[i], &master->textures->n_texture))
+				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
 		if (master->map->file[i][0] == 'S' && master->map->file[i][1] == 'O')
-			sv_texture(master->map->file[i], &master->textures->s_texture);
+			if(sv_texture(master->map->file[i], &master->textures->s_texture))
+				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
 		if (master->map->file[i][0] == 'W' && master->map->file[i][1] == 'E')
-			sv_texture(master->map->file[i], &master->textures->w_texture);
+			if(sv_texture(master->map->file[i], &master->textures->w_texture))
+				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
 		if (master->map->file[i][0] == 'E' && master->map->file[i][1] == 'A')
-			sv_texture(master->map->file[i], &master->textures->e_texture);
+			if(sv_texture(master->map->file[i], &master->textures->e_texture))
+				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
 		if (master->map->file[i][0] == 'F')
-			sv_hex(master->map->file[i], &master->textures->floor_hex);
+			if(sv_hex(master->map->file[i], &master->textures->floor_hex))
+				return (ft_putstr_fd (ERR_RGB_DUP, 2), 1);
 		if (master->map->file[i][0] == 'C')
-			sv_hex(master->map->file[i], &master->textures->ceiling_hex);
+			if(sv_hex(master->map->file[i], &master->textures->ceiling_hex))
+				return (ft_putstr_fd (ERR_RGB_DUP, 2), 1);
 		i++;
 	}
 	if (!master->textures->n_texture || !master->textures->s_texture || !master\

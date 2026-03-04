@@ -14,7 +14,9 @@
 # define ERR_MAP_EMPTY "Error\nMap file is empty\n"
 # define ERR_MAP_SHAPE "Error\nMap shape is invalid\n"
 # define ERR_RGB "Error\nInvalid RGB values\n"
+# define ERR_RGB_DUP "Error\nDuplicate RGB reference encountered\n"
 # define ERR_TXS_MISS "Error\nOne or more textures missing\n"
+# define ERR_TXS_DUP "Error\nDuplicate texture reference encountered\n"
 # define ERR_MAP_ELEM "Error\nMap has 1 or more invalid element/ is missing a starting orientation\n"
 # define ERR_MAP_OPEN "Error\nThe Map must be surrounded by walls and spaces are not allowed inside!\n"
 

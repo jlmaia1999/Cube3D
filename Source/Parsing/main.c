@@ -24,6 +24,7 @@ void	master_init(t_master **master)
 		perror("Mem_aloc Error: ");
 		exit (1);
 	}
+	ft_memset ((*master)->textures, 0, sizeof(t_textures));
 	(*master)->textures->ceiling_hex = -2;
 	(*master)->textures->floor_hex = -2;
 }

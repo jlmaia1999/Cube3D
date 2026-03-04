@@ -1,8 +1,33 @@
 #include "parsing.h"
 
+int	long_row_finder(char **map, int i)
+{
+	int row_size;
+	int big;
+	int big_row_size;
+
+	big = 0;
+	big_row_size = 0;
+	while (map[i])
+	{
+		row_size = 0;
+		while (map[i][row_size])
+		{
+			row_size++;
+		}
+		if (row_size > big_row_size)
+		{
+			big_row_size = row_size;
+		}
+		i++;
+	}
+	return (big_row_size);
+}
+
 int	sv_map(int i, t_master *master)
 {
 	int j;
+	int longest_row;
 
 	j = 0;
 	while (master->map->file[i + j])
@@ -11,9 +36,18 @@ int	sv_map(int i, t_master *master)
 	if (!master->map->map)
 		return (ft_putstr_fd ("ERROR\nMalloc error\n", 2), 1);
 	j = 0;
+	longest_row = long_row_finder(master->map->file, i);
+	printf("%d\n", longest_row);
 	while (master->map->file[i + j])
 	{
-		master->map->map[j] = ft_strdup(master->map->file[i + j]);
+		master->map->map[j] = ft_calloc(longest_row + 1, 1);
+		ft_memset (master->map->map[j], ' ', longest_row);
+		j++;
+	}
+	j = 0;
+	while (master->map->map[j])
+	{
+		ft_memcpy (master->map->map[j], master->map->file[i + j], ft_strlen(master->map->file[i + j]) + 1);
 		j++;
 	}
 	return (0);

@@ -12,7 +12,7 @@ int	map_ext_check(char *av)
 	return (0);
 }
 
-int	is_closed(char *row, int i)
+int	is_row_closed(char *row, int i)
 {
 	int j;
 
@@ -43,7 +43,20 @@ int	is_closed(char *row, int i)
 	return (1);
 }
 
-int	parse_row_border(char *row)
+int	is_col_closed(char **map, int row, int col)
+{
+	// int i;
+
+	// if (!map[row - 1])
+	// 	return (0);
+	// if (!map[row + 1])
+	// 	return (0);
+	if (map[row + 1][col] == ' ' || map[row - 1][col] == ' ')
+		return (0);
+	return (1);
+}
+
+int	parse_row_border(char *row, char **map, int row_nbr)
 {
 	int i;
 
@@ -52,12 +65,14 @@ int	parse_row_border(char *row)
 	{
 		while (row[i] == '1' || row[i] == ' ')
 			i++;
-		if (row[i] != '1' && row[i] != ' ')
+		if (row[i] != '1' && row[i] != ' ' && row[i])
 		{
-			if (!is_closed (row, i))
+			if (!is_row_closed (row, i))
 				return (1);
+			if (!is_col_closed(map, row_nbr, i))
+				return (1);
+			i++;
 		}
-		i++;
 	}
 	return (0);
 }
@@ -78,7 +93,7 @@ int	parse_borders(char **map)
 	i = 1;
 	while (map[i])
 	{
-		if(parse_row_border(map[i]))
+		if(parse_row_border(map[i], map, i))
 			return (1);
 		i++;
 	}
