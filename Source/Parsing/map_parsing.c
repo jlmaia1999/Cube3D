@@ -1,13 +1,13 @@
 #include "parsing.h"
 
-int	map_ext_check(char *av)
+int	extension_checker(char *av, char * ext)
 {
 	int	len;
 	len = ft_strlen(av);
 
-	if (len < 5 || ft_strnstr (av, ".cub", len) == NULL)
+	if (len < 5 || ft_strnstr (av, ext, len) == NULL)
 		return (1);
-	if (ft_strncmp(&av[len - 4], ".cub", 4) || av[len - 5] == '/')
+	if (ft_strncmp(&av[len - 4], ext, 4) || av[len - 5] == '/')
 		return (1);
 	return (0);
 }
@@ -47,10 +47,10 @@ int	is_col_closed(char **map, int row, int col)
 {
 	// int i;
 
-	// if (!map[row - 1])
-	// 	return (0);
-	// if (!map[row + 1])
-	// 	return (0);
+	if (!map[row - 1])
+		return (0);
+	if (!map[row + 1])
+		return (0);
 	if (map[row + 1][col] == ' ' || map[row - 1][col] == ' ')
 		return (0);
 	return (1);

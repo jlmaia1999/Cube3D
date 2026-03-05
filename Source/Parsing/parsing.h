@@ -19,7 +19,8 @@
 # define ERR_TXS_DUP "Error\nDuplicate texture reference encountered\n"
 # define ERR_MAP_ELEM "Error\nMap has 1 or more invalid element/ is missing a starting orientation\n"
 # define ERR_MAP_OPEN "Error\nThe Map must be surrounded by walls and spaces are not allowed inside!\n"
-
+# define ERR_TEX_EXT "Error\nInvalid texture file extension\n"
+# define ERR_TEX_OPEN "Error\nUnable to open texture file\n"
 
 
 typedef struct s_map
@@ -38,6 +39,12 @@ typedef struct s_textures
 	int		ceiling_hex;
 }	t_textures;
 
+typedef struct s_player
+{
+	int		player_x_y[2];
+	char	player_dir;
+}	t_player;
+
 typedef struct s_master
 {
 	t_map		*map;
@@ -45,7 +52,7 @@ typedef struct s_master
 }	t_master;
 
 void	error_exit(char *error);
-int		map_ext_check(char *av);
+int		extension_checker(char *av, char *ext);
 void	clean_n_exit(t_master **master);
 void	free_array(char **s);
 void	check_and_store_map(int fd, t_master *master);
@@ -53,6 +60,7 @@ int		sv_file(int fd, t_master *master);
 int		extract_textures(t_master *master);
 int		map_extractor(t_master *master);
 int		map_parser(char **map);
+int		parse_textures(t_textures *texs);
 
 
 #endif

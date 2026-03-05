@@ -1,14 +1,13 @@
-NO textures/wet_sponge.xpm
-SO textures/wet_sponge.xpm
-WE textures/wet_sponge.xpm
-EA textures/wet_sponge.xpm
+NO test.xpm
+SO test.xpm
+WE test.xpm
+EA test.xpm
 
 F 64,160,0
 C 253,204,252
 
 11111111111111111111
 101010111000000011111
-1010000010111110000S1
- 1110111111   11111 1
-1  1111
-
+101000001010010000S1
+ 11111111110111111111
+ 11111111111111111111

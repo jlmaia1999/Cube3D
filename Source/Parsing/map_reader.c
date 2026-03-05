@@ -67,16 +67,22 @@ int	sv_file(int fd, t_master *master)
 	return (0);
 }
 
+void	sv_player_orientation(char **map, t_master *master)
+{
+	
+}
+
 void	check_and_store_map(int fd, t_master *master)
 {
 	if (sv_file(fd, master))
 		clean_n_exit(&master);
 	if (extract_textures(master))
 		clean_n_exit(&master);
-	// if (parse_textures(master))
-	// 	clean_n_exit(&master);
+	if (parse_textures(master->textures))
+		clean_n_exit(&master);
 	if (map_extractor (master))
 		clean_n_exit(&master);
+	sv_player_orientation(master->map->map, master);
 	// printf("%s\n", master->textures->n_texture);
 	// printf("%s\n", master->textures->s_texture);
 	// printf("%s\n", master->textures->w_texture);
