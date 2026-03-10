@@ -125,15 +125,25 @@ void	clear_image(t_game *game)
 		}
 		y++;
 	}
-}
+} 
 
-bool	touch(float px, float py,  t_game *game)
+int	touch(float px, float py,  t_game *game)
 {
 	int x = px / BLOCK;
 	int y = py / BLOCK;
+	float b_x = (float)BLOCK;
 	if (game->map[y][x] == '1')
-		return true;
-	return false;
+	{
+		if ((int)px % BLOCK == 0)
+			return 1;
+		else if ((int)(py + 1) % BLOCK == 0)
+			return 2;
+		else if ((int)(px + 1) % BLOCK == 0)
+				return 1;
+		else if ((int)py % BLOCK == 0)
+			return 2;
+	}
+	return 0;
 }
 
 void draw_line(t_player *player, t_game *game, float start_x, int i)
@@ -147,7 +157,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	// (void)sin_angle;
 	while (!touch(ray_x, ray_y, game))
 	{
-		// put_pixel(ray_x, ray_y, 0xFFFFFF, game);
+		put_pixel(ray_x, ray_y, 0xFFFFFF, game);
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
@@ -158,7 +168,11 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	int end = start_y + height;
 	while(start_y < end)
 	{
-		put_pixel(i, start_y, 255, game);
+		(void)i;
+		if (touch(ray_x, ray_y, game) == 2)
+			put_pixel(i, start_y, 0xFFFFFF, game);
+		else if (touch(ray_x, ray_y, game) == 1)
+			put_pixel(i, start_y, 0x0000FF, game);
 		start_y++;
 	}
 }
@@ -170,9 +184,7 @@ int	draw_loop(t_game *game)
 	player = &game->player;
 	move_player(player);
 	clear_image(game);
-	// draw_square(player->x, player->y, 10, 0x00FF00, game);
-	// draw_map(game);
-
+	
 	float fraction = PI / 3 / WIDTH;
 	float start_x = player->angle - PI / 6;
 	int i;
@@ -185,6 +197,8 @@ int	draw_loop(t_game *game)
 	}
 	
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	draw_square(player->x, player->y, 10, 0x00FF00, game);
+	draw_map(game);
 	return 1;
 }
 
