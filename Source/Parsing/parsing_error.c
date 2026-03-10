@@ -21,8 +21,10 @@ void	error_exit(char *error)
 	exit (1);
 }
 
-void	clean_n_exit(t_master **master)
+void	clean_n_exit(t_master **master, int fd)
 {
+	if ((*master)->map->file)
+		free_array((*master)->map->file);
 	if ((*master)->map->map)
 		free_array((*master)->map->map);
 	free ((*master)->map);
@@ -35,6 +37,9 @@ void	clean_n_exit(t_master **master)
 	if ((*master)->textures->w_texture)
 		free((*master)->textures->w_texture);
 	free ((*master)->textures);
+	if ((*master)->player)
+		free ((*master)->player);
 	free (*master);
+	close (fd);
 	exit (0);
 }

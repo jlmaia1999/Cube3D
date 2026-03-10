@@ -17,8 +17,6 @@ int	is_row_closed(char *row, int i)
 	int j;
 
 	j = 1;
-	// if (!row[i + j] || !row[i - j])
-	// 	return (0);
 	while (row [i - j])
 	{
 		if (row [i - j] == '1')
@@ -45,8 +43,6 @@ int	is_row_closed(char *row, int i)
 
 int	is_col_closed(char **map, int row, int col)
 {
-	// int i;
-
 	if (!map[row - 1])
 		return (0);
 	if (!map[row + 1])

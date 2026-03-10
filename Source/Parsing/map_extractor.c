@@ -37,7 +37,6 @@ int	sv_map(int i, t_master *master)
 		return (ft_putstr_fd ("ERROR\nMalloc error\n", 2), 1);
 	j = 0;
 	longest_row = long_row_finder(master->map->file, i);
-	printf("%d\n", longest_row);
 	while (master->map->file[i + j])
 	{
 		master->map->map[j] = ft_calloc(longest_row + 1, 1);
@@ -65,10 +64,9 @@ int	map_extractor(t_master *master)
 		i++;
 	}
 	if (!master->map->file[i])
-		return (ft_putstr_fd(ERR_NO_MAP, 2), 1);
+		return (ft_putstr_fd(ERR_NO_MAP_INFILE, 2), 1);
 	if (sv_map (i, master))
 		return (1);
-	free_array (master->map->file);
 	if (map_parser(master->map->map))
 		return (1);
 	return (0);

@@ -17,8 +17,6 @@ SRCS = $(PARSE_DIR)/main.c \
 		$(PARSE_DIR)/txs_extractor.c\
 		$(PARSE_DIR)/txs_parsing.c\
 
-
-
 OBJS = $(SRCS:.c=.o)
 
 CC = cc

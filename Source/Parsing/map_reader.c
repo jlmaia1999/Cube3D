@@ -32,7 +32,10 @@ int	check_map_cut(char *file)
 			if (is_nl_valid (file, i))
 				return (0);
 			else
+			{
+				free (file);
 				return (ft_putstr_fd (ERR_MAP_SHAPE, 2), 1);
+			}
 		}
 		if (file[i] == '\n' && (file[i + 1] == '1' || file[i + 1] == ' '))
 			in_map = 1;
@@ -67,32 +70,51 @@ int	sv_file(int fd, t_master *master)
 	return (0);
 }
 
-void	sv_player_orientation(char **map, t_master *master)
+int	sv_player_orientation(char **map, t_player *p)
 {
-	
+	int i;
+	int j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N')
+				return (p->player_x = j, p->player_y = i, p->player_dir = 'N');
+			if (map[i][j] == 'S')
+				return (p->player_x = j, p->player_y = i, p->player_dir = 'S');
+			if (map[i][j] == 'E')
+				return (p->player_x = j, p->player_y = i, p->player_dir = 'E');
+			if (map[i][j] == 'W')
+				return (p->player_x = j, p->player_y = i, p->player_dir = 'W');
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 void	check_and_store_map(int fd, t_master *master)
 {
 	if (sv_file(fd, master))
-		clean_n_exit(&master);
+		clean_n_exit(&master, fd);
 	if (extract_textures(master))
-		clean_n_exit(&master);
+		clean_n_exit(&master, fd);
 	if (parse_textures(master->textures))
-		clean_n_exit(&master);
+		clean_n_exit(&master, fd);
 	if (map_extractor (master))
-		clean_n_exit(&master);
-	sv_player_orientation(master->map->map, master);
-	// printf("%s\n", master->textures->n_texture);
-	// printf("%s\n", master->textures->s_texture);
-	// printf("%s\n", master->textures->w_texture);
-	// printf("%s\n", master->textures->e_texture);
-	// printf("%X\n", master->textures->floor_hex);
-	// printf("%X\n", master->textures->ceiling_hex);
-	int i = 0;
-	while (master->map->map[i])
-	{
-		printf("%s\n", master->map->map[i]);
-		i++;
-	}
+		clean_n_exit(&master, fd);
+	sv_player_orientation(master->map->map, master->player);
+	// printf("%d\n", master->player->player_x);
+	// printf("%d\n", master->player->player_y);
+	// printf("%c\n", master->player->player_dir);
+
+	// int i = 0;
+	// while (master->map->map[i])
+	// {
+	// 	printf("%s\n", master->map->map[i]);
+	// 	i++;
+	// }
 }
