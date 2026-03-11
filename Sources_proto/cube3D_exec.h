@@ -30,15 +30,6 @@ enum e_textures
 	WEST
 };
 
-typedef struct s_img
-{
-	void		*img;
-	char		*data;
-	int			bpp;
-	int			size_line;
-	int			endian;
-}	t_img;
-
 typedef struct s_ray
 {
 	double	camera_rotation;
@@ -75,9 +66,13 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	void		*img;
 	char		*data;
-	t_player	*player;
-	t_map		map;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	t_player	player;
+	char **map;
 }	t_game;
 
 

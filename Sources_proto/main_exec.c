@@ -127,20 +127,20 @@ void	clear_image(t_game *game)
 	}
 } 
 
-int	touch(float px, float py,  t_game *game)
+int	touch(float ray_x, float ray_y, t_player *player, t_game *game)
 {
-	int x = px / BLOCK;
-	int y = py / BLOCK;
-	float b_x = (float)BLOCK;
+	int x = ray_x / BLOCK;
+	int y = ray_y / BLOCK;
+	(void)player;
 	if (game->map[y][x] == '1')
 	{
-		if ((int)px % BLOCK == 0)
+		if ((int)(round(ray_x)) % BLOCK == 0)
 			return 1;
-		else if ((int)(py + 1) % BLOCK == 0)
+		else if ((int)(ray_x + 1) % BLOCK == 0)
+					return 1;
+		else if ((int)(ray_y + 1) % BLOCK == 0)
 			return 2;
-		else if ((int)(px + 1) % BLOCK == 0)
-				return 1;
-		else if ((int)py % BLOCK == 0)
+		else if ((int)ray_y % BLOCK == 0)
 			return 2;
 	}
 	return 0;
@@ -155,7 +155,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 
 	// (void)cos_angle;
 	// (void)sin_angle;
-	while (!touch(ray_x, ray_y, game))
+	while (!touch(ray_x, ray_y, player,  game))
 	{
 		put_pixel(ray_x, ray_y, 0xFFFFFF, game);
 		ray_x += cos_angle;
@@ -169,9 +169,9 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	while(start_y < end)
 	{
 		(void)i;
-		if (touch(ray_x, ray_y, game) == 2)
+		if (touch(ray_x, ray_y, player, game) == 2)
 			put_pixel(i, start_y, 0xFFFFFF, game);
-		else if (touch(ray_x, ray_y, game) == 1)
+		else if (touch(ray_x, ray_y, player, game) == 1)
 			put_pixel(i, start_y, 0x0000FF, game);
 		start_y++;
 	}
