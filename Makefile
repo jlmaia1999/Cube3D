@@ -6,8 +6,6 @@ MINILIBX_DIR = Resources/Minilibx
 MINILIBX = $(MINILIBX_DIR)/libmlx.a
 LIBFT_DIR = Resources/Libft
 LIBFT = $(LIBFT_DIR)/libft.a
-PRINTF_DIR = Resources//ft_printf
-PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 SRCS = $(PARSE_DIR)/main.c \
 		$(PARSE_DIR)/map_parsing.c \
@@ -16,6 +14,7 @@ SRCS = $(PARSE_DIR)/main.c \
 		$(PARSE_DIR)/map_extractor.c\
 		$(PARSE_DIR)/txs_extractor.c\
 		$(PARSE_DIR)/txs_parsing.c\
+		$(SRC_DIR)/cub3d.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -23,7 +22,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 MLX_FLAGS = -L$(MINILIBX_DIR) -lmlx -lXext -lX11
 
-all: $(MINILIBX) $(LIBFT) $(PRINTF) $(NAME)
+all: $(MINILIBX) $(LIBFT)  $(NAME)
 
 $(MINILIBX):
 	$(MAKE) -C $(MINILIBX_DIR)
@@ -31,11 +30,9 @@ $(MINILIBX):
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 	
-$(PRINTF):
-	$(MAKE) -C $(PRINTF_DIR)
 
-$(NAME): $(OBJS) $(MINILIBX) $(LIBFT) $(PRINTF)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -L$(PRINTF_DIR) -lft -lftprintf $(MLX_FLAGS) -o $(NAME)
+$(NAME): $(OBJS) $(MINILIBX) $(LIBFT) 
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft $(MLX_FLAGS) -o $(NAME)
 
 download_minilibx:
 	git clone https://github.com/42Paris/minilibx-linux.git $(MINILIBX_DIR)
@@ -46,13 +43,11 @@ clean_minilibx:
 clean:
 	$(RM) $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(PRINTF_DIR) clean
 	$(MAKE) -C $(MINILIBX_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(PRINTF_DIR) fclean
 	$(MAKE) -C $(MINILIBX_DIR) clean
 
 re: fclean all clean mlx_download clean_minilibx

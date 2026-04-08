@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "../../Includes/parsing.h"
 
 void	free_array(char **s)
 {
@@ -39,7 +39,15 @@ void	clean_n_exit(t_master **master, int fd)
 	free ((*master)->textures);
 	if ((*master)->player)
 		free ((*master)->player);
+	if ((*master)->win)
+		mlx_destroy_window((*master)->mlx, (*master)->win);
+	if ((*master)->mlx)
+	{
+		mlx_destroy_display((*master)->mlx);
+		free ((*master)->mlx);
+	}
+	if (fd)
+		close (fd);
 	free (*master);
-	close (fd);
 	exit (0);
 }

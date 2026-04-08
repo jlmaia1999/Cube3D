@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "../../Includes/parsing.h"
 
 int	parse_textures(t_textures *texs)
 {

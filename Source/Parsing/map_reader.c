@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "../../Includes/parsing.h"
 
 int is_nl_valid(char *file, int i)
 {
@@ -107,14 +107,4 @@ void	check_and_store_map(int fd, t_master *master)
 	if (map_extractor (master))
 		clean_n_exit(&master, fd);
 	sv_player_orientation(master->map->map, master->player);
-	// printf("%d\n", master->player->player_x);
-	// printf("%d\n", master->player->player_y);
-	// printf("%c\n", master->player->player_dir);
-
-	// int i = 0;
-	// while (master->map->map[i])
-	// {
-	// 	printf("%s\n", master->map->map[i]);
-	// 	i++;
-	// }
 }

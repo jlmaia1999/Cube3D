@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "../../Includes/parsing.h"
 
 int	long_row_finder(char **map, int i)
 {

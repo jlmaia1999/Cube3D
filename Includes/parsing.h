@@ -1,11 +1,28 @@
-
 #ifndef PARSING_H
 #define PARSING_H
 
-# include "../../Resources/Libft/libft.h"
-# include "../../Resources/Minilibx/mlx.h"
-# include "../../Resources/Minilibx/mlx_int.h"
-# include "../../Resources/ft_printf/ft_printf.h"
+# include "../Resources/Libft/libft.h"
+# include "../Resources/Minilibx/mlx.h"
+# include "../Resources/Minilibx/mlx_int.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include "stdbool.h"
+# include "math.h"
+# include "structs.h"
+
+# define WIDTH 1280
+# define HEIGHT 720
+
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define LEFT 65361
+# define RIGHT 65363
+
+# define PI 3.14159265359
+
+# define BLOCK 64
 
 # define ERR_NO_MAP "Error\nNo map file provided\n"
 # define ERR_NO_MAP_INFILE "Error\nFile provided has no map\n"
@@ -24,35 +41,6 @@
 # define ERR_TEX_OPEN "Error\nUnable to open texture file\n"
 
 
-typedef struct s_map
-{
-	char **file;
-	char **map;
-}	t_map;
-
-typedef struct s_textures
-{
-	char	*n_texture;
-	char	*s_texture;
-	char	*w_texture;
-	char	*e_texture;
-	int		floor_hex;
-	int		ceiling_hex;
-}	t_textures;
-
-typedef struct s_player
-{
-	int		player_x;
-	int		player_y;
-	char	player_dir;
-}	t_player;
-
-typedef struct s_master
-{
-	t_map		*map;
-	t_textures	*textures;
-	t_player	*player;
-}	t_master;
 
 void	error_exit(char *error);
 int		extension_checker(char *av, char *ext);
@@ -65,6 +53,15 @@ int		map_extractor(t_master *master);
 int		map_parser(char **map);
 int		parse_textures(t_textures *texs);
 int		sv_player_orientation(char **map, t_player *p);
+int		parsing(int ac, char **av, t_master *master);
+void	master_init(t_master **master);
+
+void	move_player(t_player *player);
+int		key_release(int keycode, t_player *player);
+int		key_press(int keycode, t_player *player);
+int		draw_loop(t_master *master);
+
+
 
 
 #endif

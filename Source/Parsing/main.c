@@ -1,13 +1,28 @@
-#include "parsing.h"
+#include "../../Includes/parsing.h"
 
-void	master_init2(t_master **master, int fd)
+void	init_mlx(t_master **master)
+{
+	(*master)->mlx = mlx_init();
+	if (!(*master)->mlx)
+	{
+		perror("Mlx_aloc Error: ");
+		clean_n_exit(master, 0);
+	}
+	(*master)->win = mlx_new_window((*master)->mlx, WIDTH, HEIGHT, "cub3d");
+	if (!(*master)->win)
+	{
+		perror("Mlx_win Error: ");
+		clean_n_exit(master, 0);
+	}
+}
+
+void	master_init2(t_master **master)
 {
 	(*master)->textures = malloc (sizeof(t_textures));
 	if (!(*master)->textures)
 	{
 		free((*master)->map);
 		free ((*master));
-		close (fd);
 		perror("Mem_aloc Error: ");
 		exit (1);
 	}
@@ -20,39 +35,36 @@ void	master_init2(t_master **master, int fd)
 		free((*master)->map);
 		free((*master)->textures);
 		free ((*master));
-		close (fd);
 		perror("Mem_aloc Error: ");
 		exit (1);
 	}
 	ft_memset ((*master)->player, 0, sizeof(t_player));
+	init_mlx(master);
 }
 
-void	master_init(t_master **master, int fd)
+void	master_init(t_master **master)
 {
 	*master = malloc (sizeof(t_master));
 	if (!*master)
 	{
 		perror("Mem_aloc Error: ");
-		close (fd);
 		exit (1);
 	}
 	(*master)->map = malloc (sizeof(t_map));
 	if (!(*master)->map)
 	{
 		free ((*master));
-		close (fd);
 		perror("Mem_aloc Error: ");
 		exit (1);
 	}
 	(*master)->map = ft_memset ((*master)->map, 0, sizeof (t_map));
-	master_init2(master, fd);
+	master_init2(master);
 }
 
 
-int	main(int ac, char **av)
+int	parsing(int ac, char **av, t_master *master)
 {
 	int			fd;
-	t_master	*master;
 
 	if (ac < 2)
 		error_exit(ERR_NO_MAP);
@@ -62,7 +74,7 @@ int	main(int ac, char **av)
 		error_exit(ERR_MAP_EXT);
 	if ((fd = open (av[1], O_RDONLY)) < 0)
 		error_exit(ERR_FILE_OPEN);
-	master_init(&master, fd);
 	check_and_store_map(fd, master);
-	clean_n_exit (&master, fd);
+	close(fd);
+	return (0);
 }
