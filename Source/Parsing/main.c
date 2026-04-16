@@ -14,6 +14,9 @@ void	init_mlx(t_master **master)
 		perror("Mlx_win Error: ");
 		clean_n_exit(master, 0);
 	}
+	(*master)->image->img = mlx_new_image((*master)->mlx, WIDTH, HEIGHT);
+	(*master)->image->data = mlx_get_data_addr((*master)->image->img, &(*master)->image->bpp, &(*master)->image->size_line, &(*master)->image->endian);
+	mlx_put_image_to_window((*master)->mlx, (*master)->win, (*master)->image->img, 0, 0);
 }
 
 void	master_init2(t_master **master)
@@ -22,6 +25,7 @@ void	master_init2(t_master **master)
 	if (!(*master)->textures)
 	{
 		free((*master)->map);
+		free((*master)->image);
 		free ((*master));
 		perror("Mem_aloc Error: ");
 		exit (1);
@@ -34,6 +38,7 @@ void	master_init2(t_master **master)
 	{
 		free((*master)->map);
 		free((*master)->textures);
+		free((*master)->image);
 		free ((*master));
 		perror("Mem_aloc Error: ");
 		exit (1);
@@ -44,20 +49,36 @@ void	master_init2(t_master **master)
 
 void	master_init(t_master **master)
 {
-	*master = malloc (sizeof(t_master));
+	*master = ft_calloc (sizeof(t_master), 1);
 	if (!*master)
 	{
 		perror("Mem_aloc Error: ");
 		exit (1);
 	}
-	(*master)->map = malloc (sizeof(t_map));
+	(*master)->map = ft_calloc (sizeof(t_map), 1);
 	if (!(*master)->map)
 	{
 		free ((*master));
 		perror("Mem_aloc Error: ");
 		exit (1);
 	}
-	(*master)->map = ft_memset ((*master)->map, 0, sizeof (t_map));
+	(*master)->image = ft_calloc(sizeof(t_textures), 1);
+	if (!(*master)->image)
+	{
+		free((*master)->map);
+		free ((*master));
+		perror("Mem_aloc Error: ");
+		exit (1);
+	}
+	// (*master)->ray = calloc(sizeof(t_ray), 1);
+	// if (!(*master)->ray)
+	// {
+	// 	free((*master)->map);
+	// 	free((*master)->image);
+	// 	free ((*master));
+	// 	perror("Mem_aloc Error: ");
+	// 	exit (1);
+	// }
 	master_init2(master);
 }
 

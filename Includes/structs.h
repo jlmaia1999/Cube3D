@@ -38,7 +38,7 @@ typedef struct s_image
 
 typedef struct s_ray
 {
-	double	camera_rotation;
+	double	angle;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	int		map_x;
@@ -56,8 +56,8 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	int		player_x;
-	int		player_y;
+	float	player_x;
+	float	player_y;
 	char	player_dir;
 	float	angle;
 	bool	key_up;
@@ -75,6 +75,8 @@ typedef struct s_master
 	t_map		*map;
 	t_textures	*textures;
 	t_player	*player;
+	t_image		*image;
+	// t_ray		*ray;
 }	t_master;
 
 #endif

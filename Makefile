@@ -2,6 +2,7 @@ NAME = cub3D
 
 SRC_DIR = Source
 PARSE_DIR = $(SRC_DIR)/Parsing
+EXEC_DIR = $(SRC_DIR)/Exec
 MINILIBX_DIR = Resources/Minilibx
 MINILIBX = $(MINILIBX_DIR)/libmlx.a
 LIBFT_DIR = Resources/Libft
@@ -14,7 +15,13 @@ SRCS = $(PARSE_DIR)/main.c \
 		$(PARSE_DIR)/map_extractor.c\
 		$(PARSE_DIR)/txs_extractor.c\
 		$(PARSE_DIR)/txs_parsing.c\
-		$(SRC_DIR)/cub3d.c
+		$(SRC_DIR)/cub3d.c\
+		$(EXEC_DIR)/draw.c\
+		$(EXEC_DIR)/mini_map.c\
+		$(EXEC_DIR)/mlx_init.c\
+		$(EXEC_DIR)/movement.c\
+		$(EXEC_DIR)/ray.c
+
 
 OBJS = $(SRCS:.c=.o)
 
@@ -32,7 +39,7 @@ $(LIBFT):
 	
 
 $(NAME): $(OBJS) $(MINILIBX) $(LIBFT) 
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lm $(MLX_FLAGS) -o $(NAME)
 
 download_minilibx:
 	git clone https://github.com/42Paris/minilibx-linux.git $(MINILIBX_DIR)

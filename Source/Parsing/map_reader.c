@@ -82,13 +82,13 @@ int	sv_player_orientation(char **map, t_player *p)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'N')
-				return (p->player_x = j, p->player_y = i, p->player_dir = 'N');
+				return (p->player_x = j*BLOCK, p->player_y = i*BLOCK, p->player_dir = 'N');
 			if (map[i][j] == 'S')
-				return (p->player_x = j, p->player_y = i, p->player_dir = 'S');
+				return (p->player_x = j*BLOCK, p->player_y = i*BLOCK, p->player_dir = 'S');
 			if (map[i][j] == 'E')
-				return (p->player_x = j, p->player_y = i, p->player_dir = 'E');
+				return (p->player_x = j*BLOCK, p->player_y = i*BLOCK, p->player_dir = 'E');
 			if (map[i][j] == 'W')
-				return (p->player_x = j, p->player_y = i, p->player_dir = 'W');
+				return (p->player_x = j*BLOCK, p->player_y = i*BLOCK, p->player_dir = 'W');
 			j++;
 		}
 		i++;

@@ -10,8 +10,8 @@
 # include "math.h"
 # include "structs.h"
 
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 1920
+# define HEIGHT 1080
 
 # define W 119
 # define A 97
@@ -60,6 +60,11 @@ void	move_player(t_player *player);
 int		key_release(int keycode, t_player *player);
 int		key_press(int keycode, t_player *player);
 int		draw_loop(t_master *master);
+void	draw_map(t_master *master);
+void	draw_square(int x, int y, int size, int color, t_master *master);
+void	put_pixel(int x, int y, int color, t_image *image);
+void	init_player(t_player *player);
+void	draw_ray(t_master *master);
 
 
 

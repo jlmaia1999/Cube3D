@@ -49,6 +49,7 @@ int	sv_map(int i, t_master *master)
 		ft_memcpy (master->map->map[j], master->map->file[i + j], ft_strlen(master->map->file[i + j]) + 1);
 		j++;
 	}
+
 	return (0);
 }
 

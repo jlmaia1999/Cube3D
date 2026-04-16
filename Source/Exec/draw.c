@@ -1,5 +1,6 @@
 #include "../../Includes/parsing.h"
 
+
 void	put_pixel(int x, int y, int color, t_image *image)
 {
 	int	index;
@@ -35,7 +36,12 @@ int	draw_loop(t_master *master)
 {
 	t_player *player;
 	
-	player = &master->player;
+	player = master->player;
+	clear_image(master->image);
 	move_player(player);
-	clear_image(master);
+	draw_map(master);
+	draw_square(player->player_x, player->player_y, 10, 0x00FF00, master);
+	draw_ray(master);
+	mlx_put_image_to_window(master->mlx, master->win, master->image->img, 0, 0);
+	return (0);
 }
