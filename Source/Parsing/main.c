@@ -70,15 +70,15 @@ void	master_init(t_master **master)
 		perror("Mem_aloc Error: ");
 		exit (1);
 	}
-	// (*master)->ray = calloc(sizeof(t_ray), 1);
-	// if (!(*master)->ray)
-	// {
-	// 	free((*master)->map);
-	// 	free((*master)->image);
-	// 	free ((*master));
-	// 	perror("Mem_aloc Error: ");
-	// 	exit (1);
-	// }
+	(*master)->ray = calloc(sizeof(t_ray), 1);
+	if (!(*master)->ray)
+	{
+		free((*master)->map);
+		free((*master)->image);
+		free ((*master));
+		perror("Mem_aloc Error: ");
+		exit (1);
+	}
 	master_init2(master);
 }
 

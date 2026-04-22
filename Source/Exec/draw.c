@@ -32,6 +32,46 @@ void	clear_image(t_image *image)
 	}
 }
 
+void	draw_ray(t_master *master, float angle)
+{
+	float	distance;
+	float	true_distance;
+	float	angle_diff;
+	// int		side;
+	int		height;
+
+	dda(master, angle);
+	distance = master->ray->distance;
+	angle_diff = angle - master->player->angle;
+	if (angle_diff > PI)
+		angle_diff -= PI * 2;
+	else if (angle_diff < -PI)
+		angle_diff += PI * 2;
+	true_distance = distance * cos(angle_diff);
+	if (true_distance < 0.001f)
+		true_distance = 0.001f;
+	height = HEIGHT / true_distance;
+
+}
+
+void	init_rays(t_master *master)
+{
+	int		i;
+	float	start_x;
+	float	fraction;
+
+	i = 0;
+	fraction = PI / 3 / WIDTH;
+	start_x = master->player->angle - PI / 6;
+	while (i < WIDTH)
+	{
+		draw_ray(master, start_x);
+		start_x += fraction;
+		i++;
+	}
+}
+
+
 int	draw_loop(t_master *master)
 {
 	t_player *player;
@@ -41,7 +81,7 @@ int	draw_loop(t_master *master)
 	move_player(player);
 	draw_map(master);
 	draw_square(player->player_x, player->player_y, 10, 0x00FF00, master);
-	draw_ray(master);
+	init_rays(master);
 	mlx_put_image_to_window(master->mlx, master->win, master->image->img, 0, 0);
 	return (0);
 }
