@@ -96,16 +96,16 @@ int	extract_textures(t_master *master)
 	while (master->map->file[i])
 	{
 		if (master->map->file[i][0] == 'N' && master->map->file[i][1] == 'O')
-			if (sv_texture(master->map->file[i], &master->textures->n_texture))
+			if (sv_texture(master->map->file[i], &master->textures->t_strings[NO]))
 				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
 		if (master->map->file[i][0] == 'S' && master->map->file[i][1] == 'O')
-			if(sv_texture(master->map->file[i], &master->textures->s_texture))
+			if(sv_texture(master->map->file[i], &master->textures->t_strings[SO]))
 				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
 		if (master->map->file[i][0] == 'W' && master->map->file[i][1] == 'E')
-			if(sv_texture(master->map->file[i], &master->textures->w_texture))
+			if(sv_texture(master->map->file[i], &master->textures->t_strings[WE]))
 				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
 		if (master->map->file[i][0] == 'E' && master->map->file[i][1] == 'A')
-			if(sv_texture(master->map->file[i], &master->textures->e_texture))
+			if(sv_texture(master->map->file[i], &master->textures->t_strings[EA]))
 				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
 		if (master->map->file[i][0] == 'F')
 			if(sv_hex(master->map->file[i], &master->textures->floor_hex))
@@ -115,8 +115,8 @@ int	extract_textures(t_master *master)
 				return (ft_putstr_fd (ERR_RGB_DUP, 2), 1);
 		i++;
 	}
-	if (!master->textures->n_texture || !master->textures->s_texture || !master\
-->textures->e_texture || !master->textures->w_texture || master->textures->\
+	if (!master->textures->t_strings[NO] || !master->textures->t_strings[SO] || !master\
+->textures->t_strings[EA] || !master->textures->t_strings[WE] || master->textures->\
 ceiling_hex == -2 || master->textures->floor_hex == -2)
 		return (ft_putstr_fd (ERR_TXS_MISS, 2), 1);
 	else if (master->textures->ceiling_hex == -1 || master->textures->floor_hex == -1)

@@ -15,7 +15,7 @@ void	init_mlx(t_master **master)
 		clean_n_exit(master, 0);
 	}
 	(*master)->image->img = mlx_new_image((*master)->mlx, WIDTH, HEIGHT);
-	(*master)->image->data = mlx_get_data_addr((*master)->image->img, &(*master)->image->bpp, &(*master)->image->size_line, &(*master)->image->endian);
+	(*master)->image->adress = mlx_get_data_addr((*master)->image->img, &(*master)->image->bpp, &(*master)->image->size_line, &(*master)->image->endian);
 	mlx_put_image_to_window((*master)->mlx, (*master)->win, (*master)->image->img, 0, 0);
 }
 
@@ -33,6 +33,7 @@ void	master_init2(t_master **master)
 	ft_memset ((*master)->textures, 0, sizeof(t_textures));
 	(*master)->textures->ceiling_hex = -2;
 	(*master)->textures->floor_hex = -2;
+	// (*master)->textures->t_array = ft_calloc(4, sizeof(t_image));
 	(*master)->player = malloc (sizeof(t_player));
 	if (!(*master)->player)
 	{

@@ -1,19 +1,7 @@
-NO test.xpm
-SO test.xpm
-
-
-
-
-
-
-
-WE                   test.xpm
-
-
-
-
-
-EA test.xpm
+NO North.xpm
+SO South.xpm
+WE West.xpm
+EA East.xpm
 
 
 C 253,204,252

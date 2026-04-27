@@ -71,5 +71,4 @@ int	map_extractor(t_master *master)
 	if (map_parser(master->map->map))
 		return (1);
 	return (0);
-	
 }

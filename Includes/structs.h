@@ -17,24 +17,29 @@ typedef struct s_map
 	char **map;
 }	t_map;
 
+typedef struct s_image
+{
+	void		*img;
+	char		*adress;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	int			width;
+	int			height;
+}	t_image;
+
 typedef struct s_textures
 {
+	char	*t_strings[4];
 	char	*n_texture;
 	char	*s_texture;
 	char	*w_texture;
 	char	*e_texture;
 	int		floor_hex;
 	int		ceiling_hex;
+	t_image	t_array[4];
 }	t_textures;
 
-typedef struct s_image
-{
-	void		*img;
-	char		*data;
-	int			bpp;
-	int			size_line;
-	int			endian;
-}	t_image;
 
 typedef struct s_ray
 {
@@ -78,5 +83,13 @@ typedef struct s_master
 	t_image		*image;
 	t_ray		*ray;
 }	t_master;
+
+typedef enum e_orientation
+{
+	NO,
+	EA,
+	SO,
+	WE,
+}	t_orientation;
 
 #endif

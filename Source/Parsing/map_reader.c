@@ -96,6 +96,24 @@ int	sv_player_orientation(char **map, t_player *p)
 	return (1);
 }
 
+int	sv_textures(t_master *master)
+{
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		master->textures->t_array[i].img = mlx_xpm_file_to_image(master->mlx, master->textures->t_strings[i], &master->textures->t_array[i].width, &master->textures->t_array[i].height);
+		if (!master->textures->t_array[i].img)
+			return (ft_putstr_fd("test", 2), 1);
+		master->textures->t_array[i].adress = mlx_get_data_addr(master->textures->t_array[i].img, &master->textures->t_array[i].bpp, &master->textures->t_array[i].size_line, &master->textures->t_array[i].endian);
+		if (!master->textures->t_array[i].adress)
+			return (ft_putstr_fd("test", 2), 1);
+		i++;
+	}
+	return (0);
+}
+
 void	check_and_store_map(int fd, t_master *master)
 {
 	if (sv_file(fd, master))
@@ -105,6 +123,8 @@ void	check_and_store_map(int fd, t_master *master)
 	if (parse_textures(master->textures))
 		clean_n_exit(&master, fd);
 	if (map_extractor (master))
+		clean_n_exit(&master, fd);
+	if (sv_textures(master))
 		clean_n_exit(&master, fd);
 	sv_player_orientation(master->map->map, master->player);
 }

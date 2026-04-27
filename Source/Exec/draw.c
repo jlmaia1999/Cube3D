@@ -8,9 +8,9 @@ void	put_pixel(int x, int y, int color, t_image *image)
 	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
 		return ;
 	index = y * image->size_line + x * image->bpp / 8;
-	image->data[index] = color & 0xFF;
-	image->data[index + 1] = (color >> 8) & 0xFF;
-	image->data[index + 2] = (color >> 16) * 0xFF;
+	image->adress[index] = color & 0xFF;
+	image->adress[index + 1] = (color >> 8) & 0xFF;
+	image->adress[index + 2] = (color >> 16) * 0xFF;
 }
 
 void	clear_image(t_image *image)
