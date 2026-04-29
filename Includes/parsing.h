@@ -64,8 +64,9 @@ void	draw_map(t_master *master);
 void	draw_square(int x, int y, int size, int color, t_master *master);
 void	put_pixel(int x, int y, int color, t_image *image);
 void	init_player(t_player *player);
-void	draw_ray(t_master *master, float angle);
+void	draw_ray(t_master *master, float angle, int i);
 void	dda(t_master *master, float angle);
+void	draw_tex(t_master *master, int x, int start, int end);
 
 
 

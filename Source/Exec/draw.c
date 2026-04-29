@@ -32,12 +32,11 @@ void	clear_image(t_image *image)
 	}
 }
 
-void	draw_ray(t_master *master, float angle)
+void	draw_ray(t_master *master, float angle, int i)
 {
 	float	distance;
 	float	true_distance;
 	float	angle_diff;
-	// int		side;
 	int		height;
 
 	dda(master, angle);
@@ -51,7 +50,7 @@ void	draw_ray(t_master *master, float angle)
 	if (true_distance < 0.001f)
 		true_distance = 0.001f;
 	height = HEIGHT / true_distance;
-
+	draw_tex(master, i, (HEIGHT - height) / 2, (HEIGHT + height) / 2);
 }
 
 void	init_rays(t_master *master)
@@ -65,7 +64,7 @@ void	init_rays(t_master *master)
 	start_x = master->player->angle - PI / 6;
 	while (i < WIDTH)
 	{
-		draw_ray(master, start_x);
+		draw_ray(master, start_x, i);
 		start_x += fraction;
 		i++;
 	}
