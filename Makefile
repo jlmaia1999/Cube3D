@@ -27,7 +27,7 @@ SRCS = $(PARSE_DIR)/main.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -O3 -march=native -flto -ftree-vectorize -funroll-loops -ffast-math
 MLX_FLAGS = -L$(MINILIBX_DIR) -lmlx -lXext -lX11
 
 all: $(MINILIBX) $(LIBFT)  $(NAME)

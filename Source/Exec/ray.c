@@ -45,13 +45,11 @@ void	get_side_dist(t_master *master, float px, float py, int pos[2])
 }
 
 
-bool touch(float px, float py, t_master *master)
+bool touch(int px, int py, t_master *master)
 {
-    int x = px / BLOCK;
-    int y = py / BLOCK;
-    if(master->map->map[y][x] == '1')
-        return true;
-    return false;
+	if(master->map->map[py][px] == '1')
+		return true;
+	return false;
 }
 
 void	raycasting(t_master *master, int pos[2])
@@ -71,7 +69,7 @@ void	raycasting(t_master *master, int pos[2])
 		{
 			ray->side_dist_y += ray->delta_dist_y;
 			pos[1] += ray->step_y;
-			ray->side = 0;
+			ray->side = 1;
 		}
 		if (touch(pos[0], pos[1], master))
 			break ;

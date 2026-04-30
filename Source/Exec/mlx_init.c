@@ -6,11 +6,11 @@ void	set_angle(t_player *player)
 	if (player->player_dir == 'S')
 		player->angle = PI / 2;
 	else if(player->player_dir == 'N')
-		player->angle = -PI / 2;
+		player->angle = 3 * PI / 2;
 	else if(player->player_dir == 'W')
-		player->angle = 0;
+		player->angle = PI;
 	else if(player->player_dir == 'E')
-		player->angle = 1;
+		player->angle = 0;
 }
 
 void	init_player(t_player *player)
