@@ -18,7 +18,7 @@ SRCS = $(PARSE_DIR)/main.c \
 		$(SRC_DIR)/cub3d.c\
 		$(EXEC_DIR)/draw.c\
 		$(EXEC_DIR)/mini_map.c\
-		$(EXEC_DIR)/mlx_init.c\
+		$(EXEC_DIR)/utils.c\
 		$(EXEC_DIR)/movement.c\
 		$(EXEC_DIR)/ray.c\
 		$(EXEC_DIR)/textures.c\

@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:52:46 by jomaia            #+#    #+#             */
-/*   Updated: 2026/05/04 14:37:39 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/05/04 16:33:59 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ int	get_texture_dir(t_master *master)
 	if (side == 1)
 	{
 		if (master->ray->ray_dir_y > 0)
-			return (SO);
-		return (NO);
+			return (NO);
+		return (SO);
 	}
 	else
 	{
 		if (master->ray->ray_dir_x > 0)
-			return (EA);
-		return (WE);
+			return (WE);
+		return (EA);
 	}
 }
 

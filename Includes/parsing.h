@@ -68,6 +68,8 @@ void	draw_ray(t_master *master, float angle, int i);
 void	dda(t_master *master, float angle);
 void	draw_tex(t_master *master, int x, int start, int end);
 void	background(t_master *master);
+int		close_game(void *param);
+bool	touch(int px, int py, t_master *master);
 
 
 
