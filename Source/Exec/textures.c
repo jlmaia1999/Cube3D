@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:52:46 by jomaia            #+#    #+#             */
-/*   Updated: 2026/04/29 17:06:18 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/05/04 14:37:39 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_color(t_image *img, int x, int y)
 		x = img->width - 1;
 	if (y >= img->height)
 		y = img->height - 1;
-	offset = y * img->size_line + x * (img->bpp / 8);
+	offset = y * img->size_line + x * img->bpp / 8;
 	return (*(int *)(img->adress + offset));
 }
 
@@ -70,13 +70,16 @@ void	draw_tex(t_master *master, int x, int start, int end)
 	float	dist;
 	float	step;
 	float	pos;
-	int		y;
+	int		dir;
+	int		i;
 
 	if (master->ray->side)
 		dist = master->ray->side_dist_y - master->ray->delta_dist_y;
 	else
 		dist = master->ray->side_dist_x - master->ray->delta_dist_x;
-	step = (float)master->textures->t_array[get_texture_dir(master)].height
+	dir = get_texture_dir(master);
+	i = get_x(master, dist, master->ray->side, dir);
+	step = (float)master->textures->t_array[dir].height
 	/ (float)(end - start + 1);
 	pos = 0.0f;
 	if (start < 0)
@@ -86,12 +89,10 @@ void	draw_tex(t_master *master, int x, int start, int end)
 	}
 	if (end >= HEIGHT)
 		end = HEIGHT - 1;
-	y = start;
-	while (y <= end)
+	while (start <= end)
 	{
-		put_pixel(x, y, get_color(&master->textures->t_array[get_texture_dir(master)],
-	get_x(master, dist, master->ray->side, get_texture_dir(master)), pos), master->image);
+		put_pixel(x, start, get_color(&master->textures->t_array[dir], i, (int)pos), master->image);
 		pos += step;
-		y++;
+		start++;
 	}
 }

@@ -56,7 +56,7 @@ int		sv_player_orientation(char **map, t_player *p);
 int		parsing(int ac, char **av, t_master *master);
 void	master_init(t_master **master);
 
-void	move_player(t_player *player);
+void	move_player(t_master *master);
 int		key_release(int keycode, t_player *player);
 int		key_press(int keycode, t_player *player);
 int		draw_loop(t_master *master);
@@ -67,7 +67,7 @@ void	init_player(t_player *player);
 void	draw_ray(t_master *master, float angle, int i);
 void	dda(t_master *master, float angle);
 void	draw_tex(t_master *master, int x, int start, int end);
-
+void	background(t_master *master);
 
 
 

@@ -8,9 +8,9 @@ void	put_pixel(int x, int y, int color, t_image *image)
 	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
 		return ;
 	index = y * image->size_line + x * image->bpp / 8;
-	image->adress[index] = color & 0xFF;
-	image->adress[index + 1] = (color >> 8) & 0xFF;
-	image->adress[index + 2] = (color >> 16) * 0xFF;
+	image->adress[index] = color;
+	image->adress[index + 1] = (color >> 8);
+	image->adress[index + 2] = (color >> 16);
 }
 
 void	clear_image(t_image *image)
@@ -77,10 +77,11 @@ int	draw_loop(t_master *master)
 	
 	player = master->player;
 	clear_image(master->image);
-	move_player(player);
+	move_player(master);
+	background(master);
 	init_rays(master);
-	draw_map(master);
-	draw_square(player->player_x, player->player_y, 10, 0x00FF00, master);
+	// draw_map(master);
+	// draw_square(player->player_x, player->player_y, 10, 0x00FF00, master);
 	mlx_put_image_to_window(master->mlx, master->win, master->image->img, 0, 0);
 	return (0);
 }

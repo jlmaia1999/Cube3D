@@ -47,6 +47,10 @@ void	get_side_dist(t_master *master, float px, float py, int pos[2])
 
 bool touch(int px, int py, t_master *master)
 {
+	if (px < 0 || py < 0)
+		return true;
+	if (!master->map->map[py] || px > (int)ft_strlen(master->map->map[py]))
+		return true;
 	if(master->map->map[py][px] == '1')
 		return true;
 	return false;

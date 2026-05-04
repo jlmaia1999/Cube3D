@@ -34,8 +34,49 @@ int	key_release(int keycode, t_player *player)
 	return 0;
 }
 
-void	move_player(t_player *player)
+void	check_colision(t_master *master, float x, float y)
 {
+	t_player	*player = master->player;
+
+	if (master->map->map[(int)(player->player_y / BLOCK)][(int)(x / BLOCK)] == '1')
+		x = player->player_x;
+	if (master->map->map[(int)(y / BLOCK)][(int)(player->player_x / BLOCK)] == '1')
+		y = player->player_y;
+	player->player_x = x;
+	player->player_y = y;
+}
+
+void	movement(t_master *master, float c, float s, float speed)
+{
+	t_player	*player = master->player;
+	float		new_x = player->player_x;
+	float		new_y = player->player_y;
+	if (player->key_up)
+	{
+		new_x += c * speed;
+		new_y += s * speed;
+	}
+	if (player->key_down)
+	{
+		new_x -= c * speed;
+		new_y -= s * speed;
+	}
+	if (player->key_left)
+	{
+		new_x += s * speed;
+		new_y -= c * speed;
+	} 
+	if (player->key_right)
+	{
+		new_x -= s * speed;
+		new_y += c * speed;
+	}
+	check_colision(master, new_x, new_y);
+}
+
+void	move_player(t_master *master)
+{
+	t_player	*player = master->player;
 	int	speed = 2;
 	float	angle_speed = 0.09;
 	float	cos_angle = cos(player->angle);
@@ -49,24 +90,5 @@ void	move_player(t_player *player)
 		player->angle = 0;
 	if (player->angle < 0)
 		player->angle = 2 * PI;
-	if (player->key_up)
-	{
-		player->player_x += cos_angle * speed;
-		player->player_y += sin_angle * speed;
-	}
-	if (player->key_down)
-	{
-		player->player_x -= cos_angle * speed;
-		player->player_y -= sin_angle * speed;
-	}
-	if (player->key_left)
-	{
-		player->player_x += sin_angle * speed;
-		player->player_y -= cos_angle * speed;
-	} 
-	if (player->key_right)
-	{
-		player->player_x -= sin_angle * speed;
-		player->player_y += cos_angle * speed;
-	}
+	movement(master, cos_angle, sin_angle, speed);
 }

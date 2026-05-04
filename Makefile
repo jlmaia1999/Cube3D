@@ -21,7 +21,8 @@ SRCS = $(PARSE_DIR)/main.c \
 		$(EXEC_DIR)/mlx_init.c\
 		$(EXEC_DIR)/movement.c\
 		$(EXEC_DIR)/ray.c\
-		$(EXEC_DIR)/textures.c
+		$(EXEC_DIR)/textures.c\
+		$(EXEC_DIR)/background.c
 
 
 OBJS = $(SRCS:.c=.o)
