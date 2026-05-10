@@ -3,10 +3,10 @@
 int	long_row_finder(char **map, int i)
 {
 	int row_size;
-	int big;
+	// int big;
 	int big_row_size;
 
-	big = 0;
+	// big = 0;
 	big_row_size = 0;
 	while (map[i])
 	{

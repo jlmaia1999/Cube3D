@@ -29,5 +29,6 @@ int	close_game(void *param)
 	t_master	*master;
 
 	master = (t_master *)param;
+	clean_n_exit(&master, 0);
 	exit(1);
 }

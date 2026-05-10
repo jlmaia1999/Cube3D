@@ -73,9 +73,9 @@ void	init_rays(t_master *master)
 
 int	draw_loop(t_master *master)
 {
-	t_player *player;
+	// t_player *player;
 	
-	player = master->player;
+	// player = master->player;
 	clear_image(master->image);
 	move_player(master);
 	background(master);
