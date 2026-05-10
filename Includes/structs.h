@@ -31,10 +31,10 @@ typedef struct s_image
 typedef struct s_textures
 {
 	char	*t_strings[4];
-	char	*n_texture;
-	char	*s_texture;
-	char	*w_texture;
-	char	*e_texture;
+	// char	*n_texture;
+	// char	*s_texture;
+	// char	*w_texture;
+	// char	*e_texture;
 	int		floor_hex;
 	int		ceiling_hex;
 	t_image	t_array[4];

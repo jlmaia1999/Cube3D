@@ -105,10 +105,10 @@ int	sv_textures(t_master *master)
 	{
 		master->textures->t_array[i].img = mlx_xpm_file_to_image(master->mlx, master->textures->t_strings[i], &master->textures->t_array[i].width, &master->textures->t_array[i].height);
 		if (!master->textures->t_array[i].img)
-			return (ft_putstr_fd("test", 2), 1);
+			return (ft_putstr_fd(ERR_IMG_MLX, 2), 1);
 		master->textures->t_array[i].adress = mlx_get_data_addr(master->textures->t_array[i].img, &master->textures->t_array[i].bpp, &master->textures->t_array[i].size_line, &master->textures->t_array[i].endian);
 		if (!master->textures->t_array[i].adress)
-			return (ft_putstr_fd("test", 2), 1);
+			return (ft_putstr_fd(ERR_IMG_MLX, 2), 1);
 		i++;
 	}
 	return (0);

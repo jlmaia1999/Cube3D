@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 17:38:32 by jomaia            #+#    #+#             */
-/*   Updated: 2026/05/05 14:31:21 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/05/10 17:25:50 by diogo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/parsing.h"
 
-int	key_press(int keycode, t_player *player)
+int	key_press(int keycode, t_master *master)
 {
 	if (keycode == W)
-		player->key_up = true;
+		master->player->key_up = true;
 	if (keycode == S)
-		player->key_down = true;
+		master->player->key_down = true;
 	if (keycode == A)
-		player->key_left = true;
+		master->player->key_left = true;
 	if (keycode == D)
-		player->key_right = true;
+		master->player->key_right = true;
 	if (keycode == LEFT)
-		player->left_rotate = true;
+		master->player->left_rotate = true;
 	if (keycode == RIGHT)
-		player->right_rotate = true;
+		master->player->right_rotate = true;
 	if (keycode == XK_Escape)
-		exit(1);
+		clean_n_exit(&master, 0);
 	return 0;
 }
 

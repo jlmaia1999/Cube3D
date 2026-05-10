@@ -39,10 +39,11 @@
 # define ERR_MAP_OPEN "Error\nThe Map must be surrounded by walls and spaces are not allowed inside!\n"
 # define ERR_TEX_EXT "Error\nInvalid texture file extension\n"
 # define ERR_TEX_OPEN "Error\nUnable to open texture file\n"
+# define ERR_IMG_MLX "Error\nUnable to extract image file\n"
 
 
 
-void	error_exit(char *error);
+void	error_exit(t_master **master, char *error);
 int		extension_checker(char *av, char *ext);
 void	clean_n_exit(t_master **master, int fd);
 void	free_array(char **s);
@@ -58,7 +59,7 @@ void	master_init(t_master **master);
 
 void	move_player(t_master *master);
 int		key_release(int keycode, t_player *player);
-int		key_press(int keycode, t_player *player);
+int		key_press(int keycode, t_master *master);
 int		draw_loop(t_master *master);
 void	draw_map(t_master *master);
 void	draw_square(int x, int y, int size, int color, t_master *master);
@@ -68,7 +69,7 @@ void	draw_ray(t_master *master, float angle, int i);
 void	dda(t_master *master, float angle);
 void	draw_tex(t_master *master, int x, int start, int end);
 void	background(t_master *master);
-int		close_game(void *param);
+int		close_game(t_master **master);
 bool	touch(int px, int py, t_master *master);
 
 

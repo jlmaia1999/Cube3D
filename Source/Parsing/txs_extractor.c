@@ -62,7 +62,10 @@ int	sv_hex(char *texture, int *dir)
 	rgb = ft_split (&texture[i], ',');
 	*dir = rgb_to_hex(rgb);
 	if (*dir == -1)
+	{
+		free_array (rgb);
 		return (0);
+	}
 	free_array (rgb);
 	return (0);
 }

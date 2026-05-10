@@ -15,9 +15,10 @@ void	free_array(char **s)
 	free (s);
 }
 
-void	error_exit(char *error)
+void	error_exit(t_master **master, char *error)
 {
 	ft_putstr_fd (error, 2);
+	clean_n_exit (master, 0);
 	exit (1);
 }
 
@@ -28,15 +29,33 @@ void	clean_n_exit(t_master **master, int fd)
 	if ((*master)->map->map)
 		free_array((*master)->map->map);
 	free ((*master)->map);
-	if ((*master)->textures->e_texture)
-		free((*master)->textures->e_texture);
-	if ((*master)->textures->n_texture)
-		free((*master)->textures->n_texture);
-	if ((*master)->textures->s_texture)
-		free((*master)->textures->s_texture);
-	if ((*master)->textures->w_texture)
-		free((*master)->textures->w_texture);
+	if ((*master)->textures->t_strings[NO])
+		free((*master)->textures->t_strings[NO]);
+	if ((*master)->textures->t_strings[SO])
+		free((*master)->textures->t_strings[SO]);
+	if ((*master)->textures->t_strings[EA])
+		free((*master)->textures->t_strings[EA]);
+	if ((*master)->textures->t_strings[WE])
+		free((*master)->textures->t_strings[WE]);
+	int i;
+	i = 0;
+	while (i < 4)
+	{
+		if	((*master)->textures->t_array[i].img)
+			mlx_destroy_image((*master)->mlx, (*master)->textures->t_array[i].img);
+		i++;
+	}
 	free ((*master)->textures);
+	if ((*master)->image)
+	{
+		// if ((*master)->image->adress && *(*master)->image->adress)
+		// 	free ((*master)->image->adress);
+		if ((*master)->image->img)
+			mlx_destroy_image ((*master)->mlx, (*master)->image->img);
+		free ((*master)->image);
+	}
+	if ((*master)->ray)
+		free ((*master)->ray);
 	if ((*master)->player)
 		free ((*master)->player);
 	if ((*master)->win)

@@ -89,13 +89,13 @@ int	parsing(int ac, char **av, t_master *master)
 	int			fd;
 
 	if (ac < 2)
-		error_exit(ERR_NO_MAP);
+		error_exit(&master, ERR_NO_MAP);
 	if (ac > 2)
-		error_exit(ERR_ARGS);
+		error_exit(&master, ERR_ARGS);
 	if (extension_checker(av[1], ".cub"))
-		error_exit(ERR_MAP_EXT);
+		error_exit(&master, ERR_MAP_EXT);
 	if ((fd = open (av[1], O_RDONLY)) < 0)
-		error_exit(ERR_FILE_OPEN);
+		error_exit(&master, ERR_FILE_OPEN);
 	check_and_store_map(fd, master);
 	close(fd);
 	return (0);

@@ -24,11 +24,11 @@ void	init_player(t_player *player)
 	player->left_rotate = false;
 }
 
-int	close_game(void *param)
+int	close_game(t_master **master)
 {
-	t_master	*master;
+	// t_master	*master;
 
-	master = (t_master *)param;
-	clean_n_exit(&master, 0);
+	// master = (t_master *)param;
+	clean_n_exit(master, 0);
 	exit(1);
 }
