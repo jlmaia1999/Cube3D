@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 17:38:32 by jomaia            #+#    #+#             */
-/*   Updated: 2026/05/10 17:25:50 by diogo            ###   ########.fr       */
+/*   Updated: 2026/05/13 15:33:31 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	key_press(int keycode, t_master *master)
 		master->player->right_rotate = true;
 	if (keycode == XK_Escape)
 		clean_n_exit(&master, 0);
-	return 0;
+	return (0);
 }
 
 int	key_release(int keycode, t_player *player)
@@ -45,59 +45,68 @@ int	key_release(int keycode, t_player *player)
 		player->left_rotate = false;
 	if (keycode == RIGHT)
 		player->right_rotate = false;
-	return 0;
+	return (0);
 }
 
 void	check_colision(t_master *master, float x, float y)
 {
-	t_player	*player = master->player;
+	t_player	*player;
 
-	if (master->map->map[(int)(player->player_y / BLOCK)][(int)((x + 5.0f) / BLOCK)] == '1' 
-|| master->map->map[(int)(player->player_y / BLOCK)][(int)((x - 5.0f) / BLOCK)] == '1')
+	player = master->player;
+	if (master->map->map[(int)(player->player_y / BLOCK)][(int)((x + 5.0f) / \
+BLOCK)] == '1' || master->map->map[(int)(player->player_y / BLOCK)][(int)((x - \
+5.0f) / BLOCK)] == '1')
 		x = player->player_x;
 	player->player_x = x;
-	if (master->map->map[(int)((y + 5.0f) / BLOCK)][(int)(player->player_x / BLOCK)] == '1'
-|| master->map->map[(int)((y - 5.0f) / BLOCK)][(int)(player->player_x / BLOCK)] == '1')
+	if (master->map->map[(int)((y + 5.0f) / BLOCK)][(int)(player->player_x / \
+BLOCK)] == '1' || master->map->map[(int)((y - 5.0f) / BLOCK)][(int)\
+(player->player_x / BLOCK)] == '1')
 		y = player->player_y;
 	player->player_y = y;
 }
 
 void	movement(t_master *master, float c, float s, float speed)
 {
-	t_player	*player = master->player;
-	float		new_x = player->player_x;
-	float		new_y = player->player_y;
-	if (player->key_up)
+	float	new_pos[2];
+
+	new_pos[0] = master->player->player_x;
+	new_pos[1] = master->player->player_y;
+	if (master->player->key_up)
 	{
-		new_x += c * speed;
-		new_y += s * speed;
+		new_pos[0] += c * speed;
+		new_pos[1] += s * speed;
 	}
-	if (player->key_down)
+	if (master->player->key_down)
 	{
-		new_x -= c * speed;
-		new_y -= s * speed;
+		new_pos[0] -= c * speed;
+		new_pos[1] -= s * speed;
 	}
-	if (player->key_left)
+	if (master->player->key_left)
 	{
-		new_x += s * speed;
-		new_y -= c * speed;
-	} 
-	if (player->key_right)
-	{
-		new_x -= s * speed;
-		new_y += c * speed;
+		new_pos[0] += s * speed;
+		new_pos[1] -= c * speed;
 	}
-	check_colision(master, new_x, new_y);
+	if (master->player->key_right)
+	{
+		new_pos[0] -= s * speed;
+		new_pos[1] += c * speed;
+	}
+	check_colision(master, new_pos[0], new_pos[1]);
 }
 
 void	move_player(t_master *master)
 {
-	t_player	*player = master->player;
-	int	speed = 2;
-	float	angle_speed = 0.09;
-	float	cos_angle = cos(player->angle);
-	float	sin_angle = sin(player->angle);
+	t_player	*player;
+	int			speed;
+	float		angle_speed;
+	float		cos_angle;
+	float		sin_angle;
 
+	player = master->player;
+	speed = 2;
+	angle_speed = 0.09;
+	cos_angle = cos(player->angle);
+	sin_angle = sin(player->angle);
 	if (player->left_rotate)
 		player->angle -= angle_speed;
 	if (player->right_rotate)

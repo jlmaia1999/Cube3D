@@ -62,7 +62,7 @@ int		key_release(int keycode, t_player *player);
 int		key_press(int keycode, t_master *master);
 int		draw_loop(t_master *master);
 void	draw_map(t_master *master);
-void	draw_square(int x, int y, int size, int color, t_master *master);
+void	draw_square(int x, int y, int color, t_master *master);
 void	put_pixel(int x, int y, int color, t_image *image);
 void	init_player(t_player *player);
 void	draw_ray(t_master *master, float angle, int i);

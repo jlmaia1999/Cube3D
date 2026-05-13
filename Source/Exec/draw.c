@@ -1,5 +1,16 @@
-#include "../../Includes/parsing.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 14:40:21 by jomaia            #+#    #+#             */
+/*   Updated: 2026/05/13 14:40:51 by jomaia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../Includes/parsing.h"
 
 void	put_pixel(int x, int y, int color, t_image *image)
 {
@@ -70,18 +81,12 @@ void	init_rays(t_master *master)
 	}
 }
 
-
 int	draw_loop(t_master *master)
 {
-	// t_player *player;
-	
-	// player = master->player;
 	clear_image(master->image);
 	move_player(master);
 	background(master);
 	init_rays(master);
-	// draw_map(master);
-	// draw_square(player->player_x, player->player_y, 10, 0x00FF00, master);
 	mlx_put_image_to_window(master->mlx, master->win, master->image->img, 0, 0);
 	return (0);
 }

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 14:30:35 by jomaia            #+#    #+#             */
+/*   Updated: 2026/05/13 14:34:07 by jomaia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../Includes/parsing.h"
 
 void	init_ray(t_master *master, float angle)
 {
-	t_ray *ray;
+	t_ray	*ray;
 
 	ray = master->ray;
 	ray->ray_dir_x = cos(angle);
@@ -19,7 +31,7 @@ void	init_ray(t_master *master, float angle)
 
 void	get_side_dist(t_master *master, float px, float py, int pos[2])
 {
-	t_ray *ray;
+	t_ray	*ray;
 
 	ray = master->ray;
 	if (ray->ray_dir_x < 0)
@@ -44,16 +56,15 @@ void	get_side_dist(t_master *master, float px, float py, int pos[2])
 	}
 }
 
-
 bool	touch(int px, int py, t_master *master)
 {
 	if (px < 0 || py < 0)
-		return true;
+		return (true);
 	if (!master->map->map[py] || px > (int)ft_strlen(master->map->map[py]))
-		return true;
-	if(master->map->map[py][px] == '1')
-		return true;
-	return false;
+		return (true);
+	if (master->map->map[py][px] == '1')
+		return (true);
+	return (false);
 }
 
 void	raycasting(t_master *master, int pos[2])
@@ -94,7 +105,9 @@ void	dda(t_master *master, float angle)
 	get_side_dist(master, px, py, pos);
 	raycasting(master, pos);
 	if (master->ray->side == 0)
-		master->ray->distance = (pos[0] - px + (1 - master->ray->step_x) * 0.5f) / master->ray->ray_dir_x;
+		master->ray->distance = (pos[0] - px + (1 - master->ray->step_x) \
+* 0.5f) / master->ray->ray_dir_x;
 	else
-		master->ray->distance = (pos[1] - py + (1 - master->ray->step_y) * 0.5f) / master->ray->ray_dir_y;
+		master->ray->distance = (pos[1] - py + (1 - master->ray->step_y) \
+* 0.5f) / master->ray->ray_dir_y;
 }
