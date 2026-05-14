@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/14 20:42:40 by diogo             #+#    #+#             */
+/*   Updated: 2026/05/14 20:43:03 by diogo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -8,13 +20,11 @@
 # include <X11/keysym.h>
 # include "stdbool.h"
 # include "math.h"
-# include "exec.h"
-
 
 typedef struct s_map
 {
-	char **file;
-	char **map;
+	char	**file;
+	char	**map;
 }	t_map;
 
 typedef struct s_image
@@ -31,15 +41,10 @@ typedef struct s_image
 typedef struct s_textures
 {
 	char	*t_strings[4];
-	// char	*n_texture;
-	// char	*s_texture;
-	// char	*w_texture;
-	// char	*e_texture;
 	int		floor_hex;
 	int		ceiling_hex;
 	t_image	t_array[4];
 }	t_textures;
-
 
 typedef struct s_ray
 {

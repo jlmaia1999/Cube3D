@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/14 20:39:17 by diogo             #+#    #+#             */
+/*   Updated: 2026/05/14 20:42:30 by diogo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSING_H
-#define PARSING_H
+# define PARSING_H
 
 # include "../Resources/Libft/libft.h"
 # include "../Resources/Minilibx/mlx.h"
@@ -30,33 +42,36 @@
 # define ERR_MAP_EXT "Error\nInvalid map file extension\n"
 # define ERR_FILE_OPEN "Error\nUnable to open map file\n"
 # define ERR_MAP_EMPTY "Error\nMap file is empty\n"
-# define ERR_MAP_SHAPE "Error\nMap shape is invalid or parameters stated incorrectly\n"
+# define ERR_MAP_SHAPE "Error\nMap shape is invalid or \
+parameters stated incorrectly\n"
 # define ERR_RGB "Error\nInvalid RGB values\n"
 # define ERR_RGB_DUP "Error\nDuplicate RGB reference encountered\n"
 # define ERR_TXS_MISS "Error\nOne or more textures missing\n"
 # define ERR_TXS_DUP "Error\nDuplicate texture reference encountered\n"
-# define ERR_MAP_ELEM "Error\nMap has 1 or more invalid element/ is missing a starting orientation\n"
-# define ERR_MAP_OPEN "Error\nThe Map must be surrounded by walls and spaces are not allowed inside!\n"
+# define ERR_MAP_ELEM "Error\nMap has 1 or more invalid element/ is \
+missing a starting orientation\n"
+# define ERR_MAP_OPEN "Error\nThe Map must be surrounded by walls and \
+spaces are not allowed inside!\n"
 # define ERR_TEX_EXT "Error\nInvalid texture file extension\n"
 # define ERR_TEX_OPEN "Error\nUnable to open texture file\n"
 # define ERR_IMG_MLX "Error\nUnable to extract image file\n"
-
-
 
 void	error_exit(t_master **master, char *error);
 int		extension_checker(char *av, char *ext);
 void	clean_n_exit(t_master **master, int fd);
 void	free_array(char **s);
 void	check_and_store_map(int fd, t_master *master);
+int		is_row_closed(char *row, int i);
+int		is_nl_valid(char *file, int i);
 int		sv_file(int fd, t_master *master);
 int		extract_textures(t_master *master);
 int		map_extractor(t_master *master);
 int		map_parser(char **map);
 int		parse_textures(t_textures *texs);
-int		sv_player_orientation(char **map, t_player *p);
+int		ft_atoi_rgb(const char *nptr);
+int		sv_player_orientation(char **map, t_player *p, int i);
 int		parsing(int ac, char **av, t_master *master);
 void	master_init(t_master **master);
-
 void	move_player(t_master *master);
 int		key_release(int keycode, t_player *player);
 int		key_press(int keycode, t_master *master);
@@ -71,7 +86,5 @@ void	draw_tex(t_master *master, int x, int start, int end);
 void	background(t_master *master);
 int		close_game(t_master **master);
 bool	touch(int px, int py, t_master *master);
-
-
 
 #endif

@@ -1,12 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_extractor.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/14 19:35:42 by diogo             #+#    #+#             */
+/*   Updated: 2026/05/14 19:51:00 by diogo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../Includes/parsing.h"
 
 int	long_row_finder(char **map, int i)
 {
-	int row_size;
-	// int big;
-	int big_row_size;
+	int	row_size;
+	int	big_row_size;
 
-	// big = 0;
 	big_row_size = 0;
 	while (map[i])
 	{
@@ -26,8 +36,8 @@ int	long_row_finder(char **map, int i)
 
 int	sv_map(int i, t_master *master)
 {
-	int j;
-	int longest_row;
+	int	j;
+	int	longest_row;
 
 	j = 0;
 	while (master->map->file[i + j])
@@ -46,10 +56,10 @@ int	sv_map(int i, t_master *master)
 	j = 0;
 	while (master->map->map[j])
 	{
-		ft_memcpy (master->map->map[j], master->map->file[i + j], ft_strlen(master->map->file[i + j]) + 1);
+		ft_memcpy (master->map->map[j], master->map->file[i + j], ft_strlen\
+(master->map->file[i + j]) + 1);
 		j++;
 	}
-
 	return (0);
 }
 

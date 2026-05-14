@@ -1,45 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/14 19:35:48 by diogo             #+#    #+#             */
+/*   Updated: 2026/05/14 19:54:59 by diogo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../Includes/parsing.h"
-
-int	extension_checker(char *av, char * ext)
-{
-	int	len;
-	len = ft_strlen(av);
-
-	if (len < 5 || ft_strnstr (av, ext, len) == NULL)
-		return (1);
-	if (ft_strncmp(&av[len - 4], ext, 4) || av[len - 5] == '/')
-		return (1);
-	return (0);
-}
-
-int	is_row_closed(char *row, int i)
-{
-	int j;
-
-	j = 1;
-	while (row [i - j])
-	{
-		if (row [i - j] == '1')
-			break ;
-		if (row [i - j] == ' ')
-			return (0);
-		j++;
-	}
-	if (!row[i - j])
-		return (0);
-	j = 1;
-	while (row [i + j])
-	{
-		if (row [i + j] == '1')
-			break ;
-		if (row [i + j] == ' ')
-			return (0);
-		j++;
-	}
-	if (!row[i + j])
-		return (0);
-	return (1);
-}
 
 int	is_col_closed(char **map, int row, int col)
 {
@@ -54,7 +25,7 @@ int	is_col_closed(char **map, int row, int col)
 
 int	parse_row_border(char *row, char **map, int row_nbr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (row[i])
@@ -75,8 +46,8 @@ int	parse_row_border(char *row, char **map, int row_nbr)
 
 int	parse_borders(char **map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -89,7 +60,7 @@ int	parse_borders(char **map)
 	i = 1;
 	while (map[i])
 	{
-		if(parse_row_border(map[i], map, i))
+		if (parse_row_border(map[i], map, i))
 			return (1);
 		i++;
 	}
@@ -104,9 +75,9 @@ int	parse_borders(char **map)
 
 int	parse_map_elements(char **map)
 {
-	int i;
-	int j;
-	int player;
+	int	i;
+	int	j;
+	int	player;
 
 	i = 0;
 	player = 0;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/14 19:35:36 by diogo             #+#    #+#             */
+/*   Updated: 2026/05/14 19:46:40 by diogo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../Includes/parsing.h"
 
 void	init_mlx(t_master **master)
@@ -15,12 +27,38 @@ void	init_mlx(t_master **master)
 		clean_n_exit(master, 0);
 	}
 	(*master)->image->img = mlx_new_image((*master)->mlx, WIDTH, HEIGHT);
-	(*master)->image->adress = mlx_get_data_addr((*master)->image->img, &(*master)->image->bpp, &(*master)->image->size_line, &(*master)->image->endian);
-	mlx_put_image_to_window((*master)->mlx, (*master)->win, (*master)->image->img, 0, 0);
+	(*master)->image->adress = mlx_get_data_addr((*master)->image->img, &(\
+*master)->image->bpp, &(*master)->image->size_line, &(*master)->image->endian);
+	mlx_put_image_to_window((*master)->mlx, (*master)->win, (\
+*master)->image->img, 0, 0);
+}
+
+void	master_init3(t_master **master)
+{
+	if (!(*master)->player)
+	{
+		free((*master)->map);
+		free((*master)->textures);
+		free((*master)->image);
+		free ((*master));
+		perror("Mem_aloc Error: ");
+		exit (1);
+	}
+	ft_memset ((*master)->player, 0, sizeof(t_player));
+	init_mlx(master);
 }
 
 void	master_init2(t_master **master)
 {
+	(*master)->ray = calloc(sizeof(t_ray), 1);
+	if (!(*master)->ray)
+	{
+		free((*master)->map);
+		free((*master)->image);
+		free ((*master));
+		perror("Mem_aloc Error: ");
+		exit (1);
+	}
 	(*master)->textures = malloc (sizeof(t_textures));
 	if (!(*master)->textures)
 	{
@@ -33,19 +71,8 @@ void	master_init2(t_master **master)
 	ft_memset ((*master)->textures, 0, sizeof(t_textures));
 	(*master)->textures->ceiling_hex = -2;
 	(*master)->textures->floor_hex = -2;
-	// (*master)->textures->t_array = ft_calloc(4, sizeof(t_image));
 	(*master)->player = malloc (sizeof(t_player));
-	if (!(*master)->player)
-	{
-		free((*master)->map);
-		free((*master)->textures);
-		free((*master)->image);
-		free ((*master));
-		perror("Mem_aloc Error: ");
-		exit (1);
-	}
-	ft_memset ((*master)->player, 0, sizeof(t_player));
-	init_mlx(master);
+	master_init3 (master);
 }
 
 void	master_init(t_master **master)
@@ -71,18 +98,8 @@ void	master_init(t_master **master)
 		perror("Mem_aloc Error: ");
 		exit (1);
 	}
-	(*master)->ray = calloc(sizeof(t_ray), 1);
-	if (!(*master)->ray)
-	{
-		free((*master)->map);
-		free((*master)->image);
-		free ((*master));
-		perror("Mem_aloc Error: ");
-		exit (1);
-	}
 	master_init2(master);
 }
-
 
 int	parsing(int ac, char **av, t_master *master)
 {
@@ -94,7 +111,8 @@ int	parsing(int ac, char **av, t_master *master)
 		error_exit(&master, ERR_ARGS);
 	if (extension_checker(av[1], ".cub"))
 		error_exit(&master, ERR_MAP_EXT);
-	if ((fd = open (av[1], O_RDONLY)) < 0)
+	fd = open (av[1], O_RDONLY);
+	if (fd < 0)
 		error_exit(&master, ERR_FILE_OPEN);
 	check_and_store_map(fd, master);
 	close(fd);

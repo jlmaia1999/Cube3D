@@ -1,27 +1,21 @@
-#include "../../Includes/parsing.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_reader.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/14 19:35:54 by diogo             #+#    #+#             */
+/*   Updated: 2026/05/14 20:36:33 by diogo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int is_nl_valid(char *file, int i)
-{
-	while (file[i])
-	{
-		if (file[i] == '\n' && file[i + 1] == '\n')
-		{
-			while (file[i] == '\n')
-				i++;
-			if (!file [i])
-				return (1);
-			else
-				return (0);
-		}
-		i++;
-	}
-	return (1);
-}
+#include "../../Includes/parsing.h"
 
 int	check_map_cut(char *file)
 {
-	int in_map;
-	int i;
+	int	in_map;
+	int	i;
 
 	in_map = 0;
 	i = 0;
@@ -46,8 +40,8 @@ int	check_map_cut(char *file)
 
 int	sv_file(int fd, t_master *master)
 {
-	char *line;
-	char *file_cpy;
+	char	*line;
+	char	*file_cpy;
 
 	line = get_next_line(fd);
 	if (!line)
@@ -70,25 +64,27 @@ int	sv_file(int fd, t_master *master)
 	return (0);
 }
 
-int	sv_player_orientation(char **map, t_player *p)
+int	sv_player_orientation(char **map, t_player *p, int i)
 {
-	int i;
-	int j;
+	int	j;
 
-	i = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
 			if (map[i][j] == 'N')
-				return (p->player_x = (j*BLOCK) + 32.0f, p->player_y = (i*BLOCK) + 32.0f, p->player_dir = 'N');
+				return (p->player_x = (j * BLOCK) + 32.0f, p->player_y = \
+(i * BLOCK) + 32.0f, p->player_dir = 'N');
 			if (map[i][j] == 'S')
-				return (p->player_x = (j*BLOCK) + 32.0f, p->player_y = (i*BLOCK) + 32.0f, p->player_dir = 'S');
+				return (p->player_x = (j * BLOCK) + 32.0f, p->player_y = \
+(i * BLOCK) + 32.0f, p->player_dir = 'S');
 			if (map[i][j] == 'E')
-				return (p->player_x = (j*BLOCK) + 32.0f , p->player_y = (i*BLOCK) + 32.0f, p->player_dir = 'E');
+				return (p->player_x = (j * BLOCK) + 32.0f, p->player_y = \
+(i * BLOCK) + 32.0f, p->player_dir = 'E');
 			if (map[i][j] == 'W')
-				return (p->player_x = (j*BLOCK) + 32.0f, p->player_y = (i*BLOCK) + 32.0f, p->player_dir = 'W');
+				return (p->player_x = (j * BLOCK) + 32.0f, p->player_y = \
+(i * BLOCK) + 32.0f, p->player_dir = 'W');
 			j++;
 		}
 		i++;
@@ -98,15 +94,19 @@ int	sv_player_orientation(char **map, t_player *p)
 
 int	sv_textures(t_master *master)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
 	{
-		master->textures->t_array[i].img = mlx_xpm_file_to_image(master->mlx, master->textures->t_strings[i], &master->textures->t_array[i].width, &master->textures->t_array[i].height);
+		master->textures->t_array[i].img = mlx_xpm_file_to_image\
+(master->mlx, master->textures->t_strings[i], \
+&master->textures->t_array[i].width, &master->textures->t_array[i].height);
 		if (!master->textures->t_array[i].img)
 			return (ft_putstr_fd(ERR_IMG_MLX, 2), 1);
-		master->textures->t_array[i].adress = mlx_get_data_addr(master->textures->t_array[i].img, &master->textures->t_array[i].bpp, &master->textures->t_array[i].size_line, &master->textures->t_array[i].endian);
+		master->textures->t_array[i].adress = mlx_get_data_addr\
+(master->textures->t_array[i].img, &master->textures->t_array[i].bpp, \
+&master->textures->t_array[i].size_line, &master->textures->t_array[i].endian);
 		if (!master->textures->t_array[i].adress)
 			return (ft_putstr_fd(ERR_IMG_MLX, 2), 1);
 		i++;
@@ -126,5 +126,5 @@ void	check_and_store_map(int fd, t_master *master)
 		clean_n_exit(&master, fd);
 	if (sv_textures(master))
 		clean_n_exit(&master, fd);
-	sv_player_orientation(master->map->map, master->player);
+	sv_player_orientation(master->map->map, master->player, 0);
 }
