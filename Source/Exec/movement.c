@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 17:38:32 by jomaia            #+#    #+#             */
-/*   Updated: 2026/05/13 15:33:31 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/07/14 15:42:18 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,23 @@ void	check_colision(t_master *master, float x, float y)
 	t_player	*player;
 
 	player = master->player;
-	if (master->map->map[(int)(player->player_y / BLOCK)][(int)((x + 5.0f) / \
-BLOCK)] == '1' || master->map->map[(int)(player->player_y / BLOCK)][(int)((x - \
-5.0f) / BLOCK)] == '1')
+	if (master->map->map[(int)(player->player_y / BLOCK)][(int)((x + 8.0f) / \
+	BLOCK)] == '1' || master->map->map[(int)(player->player_y / BLOCK)][(int)((x - \
+	8.0f) / BLOCK)] == '1')
 		x = player->player_x;
-	player->player_x = x;
-	if (master->map->map[(int)((y + 5.0f) / BLOCK)][(int)(player->player_x / \
-BLOCK)] == '1' || master->map->map[(int)((y - 5.0f) / BLOCK)][(int)\
-(player->player_x / BLOCK)] == '1')
+	if (master->map->map[(int)((y + 8.0f) / BLOCK)][(int)(player->player_x / \
+	BLOCK)] == '1' || master->map->map[(int)((y - 8.0f) / BLOCK)][(int)\
+	(player->player_x / BLOCK)] == '1')
 		y = player->player_y;
+	if (master->map->map[(int)((y + 8.0f) / BLOCK)][(int)((x + 8.0f) / BLOCK)] == '1' || \
+	master->map->map[(int)((y - 8.0f) / BLOCK)][(int)((x - 8.0f) / BLOCK)] == '1' || \
+	master->map->map[(int)((y + 8.0f) / BLOCK)][(int)((x - 8.0f) / BLOCK)] == '1' || \
+	master->map->map[(int)((y - 8.0f) / BLOCK)][(int)((x + 8.0f) / BLOCK)] == '1')
+	{
+		x = player->player_x;
+		y = player->player_y;
+	}
+	player->player_x = x;
 	player->player_y = y;
 }
 

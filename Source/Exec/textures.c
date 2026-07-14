@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 15:52:46 by jomaia            #+#    #+#             */
-/*   Updated: 2026/05/13 15:33:24 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/07/14 14:11:15 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@ int	get_color(t_image *img, int x, int y)
 {
 	int	offset;
 
-	if (x < 0)
-		x = 0;
-	if (y < 0)
-		y = 0;
 	if (x >= img->width)
 		x = img->width - 1;
 	if (y >= img->height)

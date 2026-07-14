@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 20:39:17 by diogo             #+#    #+#             */
-/*   Updated: 2026/05/14 20:42:30 by diogo            ###   ########.fr       */
+/*   Updated: 2026/07/14 14:08:37 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../Resources/Libft/libft.h"
 # include "../Resources/Minilibx/mlx.h"
-# include "../Resources/Minilibx/mlx_int.h"
+// # include "../Resources/Minilibx/mlx_int.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "stdbool.h"
