@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: diomende <diomende@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:35:48 by diogo             #+#    #+#             */
-/*   Updated: 2026/05/14 19:54:59 by diogo            ###   ########.fr       */
+/*   Updated: 2026/07/19 15:48:38 by diomende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 int	is_col_closed(char **map, int row, int col)
 {
 	if (!map[row - 1])
+		return  (0);
+	if (!map[row - 1][col])
 		return (0);
 	if (!map[row + 1])
+		return (0);
+	if (!map[row + 1][col])
 		return (0);
 	if (map[row + 1][col] == ' ' || map[row - 1][col] == ' ')
 		return (0);

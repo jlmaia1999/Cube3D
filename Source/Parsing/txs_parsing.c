@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   txs_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: diomende <diomende@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:36:11 by diogo             #+#    #+#             */
-/*   Updated: 2026/05/14 20:30:47 by diogo            ###   ########.fr       */
+/*   Updated: 2026/07/19 15:21:52 by diomende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,13 @@ int	extension_checker(char *av, char *ext)
 
 int	is_row_closed(char *row, int i)
 {
-	int	j;
-
-	j = 1;
-	while (row [i - j])
-	{
-		if (row [i - j] == '1')
-			break ;
-		if (row [i - j] == ' ')
-			return (0);
-		j++;
-	}
-	if (!row[i - j])
+	if (i == 0)
 		return (0);
-	j = 1;
-	while (row [i + j])
-	{
-		if (row [i + j] == '1')
-			break ;
-		if (row [i + j] == ' ')
-			return (0);
-		j++;
-	}
-	if (!row[i + j])
+	if (!row[i - 1])
+		return (0);
+	if (!row[i + 1])
+		return (0);
+	if (row[i - 1] == ' ' || row[i + 1] == ' ')
 		return (0);
 	return (1);
 }
