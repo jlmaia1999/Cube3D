@@ -1,7 +1,7 @@
-NO North2.xpm
-SO South2.xpm
-WE West2.xpm
-EA East2.xpm
+NO Textures/North2.xpm
+SO Textures/South2.xpm
+WE Textures/West2.xpm
+EA Textures/East2.xpm
 
 
 C 0,0,0

@@ -1,7 +1,7 @@
-NO North.xpm
-SO South.xpm
-WE West.xpm
-EA East.xpm
+NO Textures/North.xpm
+SO Textures/South.xpm
+WE Textures/West.xpm
+EA Textures/East.xpm
 
 F 34,139,34
 C 135, 206, 235
