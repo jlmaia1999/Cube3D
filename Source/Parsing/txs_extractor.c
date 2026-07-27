@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   txs_extractor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: diomende <diomende@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:36:05 by diogo             #+#    #+#             */
-/*   Updated: 2026/05/14 20:29:34 by diogo            ###   ########.fr       */
+/*   Updated: 2026/07/27 19:59:06 by diomende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	rgb_to_hex(char **rgb)
 	int	g;
 	int	b;
 
-	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
 		return (-1);
 	r = ft_atoi_rgb(rgb[0]);
 	g = ft_atoi_rgb(rgb[1]);
@@ -36,13 +36,13 @@ int	sv_hex(char *texture, int *dir)
 	i = 0;
 	if (*dir > 0)
 		return (1);
-	while (texture[i] != ' ')
+	while (texture[i] != ' ' && texture[i])
 		i++;
-	if (!texture[i])
-		return (0);
 	while (texture[i] == ' ')
 		i++;
 	if (!texture[i])
+		return (0);
+	if (!ft_isdigit(texture[i]))
 		return (0);
 	rgb = ft_split (&texture[i], ',');
 	*dir = rgb_to_hex(rgb);

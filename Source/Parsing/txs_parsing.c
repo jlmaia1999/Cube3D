@@ -6,7 +6,7 @@
 /*   By: diomende <diomende@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:36:11 by diogo             #+#    #+#             */
-/*   Updated: 2026/07/19 15:21:52 by diomende         ###   ########.fr       */
+/*   Updated: 2026/07/27 20:02:32 by diomende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,12 @@ int	ft_atoi_rgb(const char *nptr)
 			sign = sign * -1;
 		i++;
 	}
+	if (!ft_isdigit(nptr[i]))
+		return (-1);
 	while (ft_isdigit(nptr[i]) == 1)
-	{
-		result = (result * 10) + (nptr[i] - 48);
+		result = (result * 10) + (nptr[i++] - 48);
+	while (nptr[i] == ' ')
 		i++;
-	}
 	if (nptr[i])
 		return (-1);
 	return (result * sign);
