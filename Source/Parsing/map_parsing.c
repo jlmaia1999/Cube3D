@@ -15,7 +15,7 @@
 int	is_col_closed(char **map, int row, int col)
 {
 	if (!map[row - 1])
-		return  (0);
+		return (0);
 	if (!map[row - 1][col])
 		return (0);
 	if (!map[row + 1])

@@ -54,17 +54,18 @@ void	check_colision(t_master *master, float x, float y)
 
 	player = master->player;
 	if (master->map->map[(int)(player->player_y / BLOCK)][(int)((x + 8.0f) / \
-	BLOCK)] == '1' || master->map->map[(int)(player->player_y / BLOCK)][(int)((x - \
-	8.0f) / BLOCK)] == '1')
+BLOCK)] == '1' || master->map->map[(int)(player->player_y / BLOCK)][(int)((x - \
+8.0f) / BLOCK)] == '1')
 		x = player->player_x;
 	if (master->map->map[(int)((y + 8.0f) / BLOCK)][(int)(player->player_x / \
-	BLOCK)] == '1' || master->map->map[(int)((y - 8.0f) / BLOCK)][(int)\
-	(player->player_x / BLOCK)] == '1')
+BLOCK)] == '1' || master->map->map[(int)((y - 8.0f) / BLOCK)][(int)\
+(player->player_x / BLOCK)] == '1')
 		y = player->player_y;
-	if (master->map->map[(int)((y + 8.0f) / BLOCK)][(int)((x + 8.0f) / BLOCK)] == '1' || \
-	master->map->map[(int)((y - 8.0f) / BLOCK)][(int)((x - 8.0f) / BLOCK)] == '1' || \
-	master->map->map[(int)((y + 8.0f) / BLOCK)][(int)((x - 8.0f) / BLOCK)] == '1' || \
-	master->map->map[(int)((y - 8.0f) / BLOCK)][(int)((x + 8.0f) / BLOCK)] == '1')
+	if (master->map->map[(int)((y + 8.0f) / BLOCK)][(int)((x + 8.0f) / \
+BLOCK)] == '1' || master->map->map[(int)((y - 8.0f) / BLOCK)][(int)((x - 8.0f) \
+/ BLOCK)] == '1' || master->map->map[(int)((y + 8.0f) / BLOCK)][(int)((x - 8.0f) \
+/ BLOCK)] == '1' || master->map->map[(int)((y - 8.0f) / BLOCK)][(int)((x + 8.0f) \
+/ BLOCK)] == '1')
 	{
 		x = player->player_x;
 		y = player->player_y;
@@ -111,8 +112,8 @@ void	move_player(t_master *master)
 	float		sin_angle;
 
 	player = master->player;
-	speed = 2;
-	angle_speed = 0.09;
+	speed = 1;
+	angle_speed = 0.02;
 	cos_angle = cos(player->angle);
 	sin_angle = sin(player->angle);
 	if (player->left_rotate)
