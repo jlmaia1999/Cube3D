@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   txs_extractor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diomende <diomende@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:36:05 by diogo             #+#    #+#             */
-/*   Updated: 2026/07/27 19:59:06 by diomende         ###   ########.fr       */
+/*   Updated: 2026/07/31 17:28:25 by diogo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	sv_texture(char *texture, char **path)
 	int	i;
 
 	i = 0;
+	if (texture[2] != ' ')
+		return (0);
 	if (*path == NULL)
 	{
 		while (texture[i] != ' ')
