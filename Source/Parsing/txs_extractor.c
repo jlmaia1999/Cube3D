@@ -6,7 +6,7 @@
 /*   By: diomende <diomende@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:36:05 by diogo             #+#    #+#             */
-/*   Updated: 2026/08/04 19:24:45 by diomende         ###   ########.fr       */
+/*   Updated: 2026/08/04 20:22:41 by diomende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	sv_texture(char *texture, char **path)
 	int	i;
 
 	i = 0;
-
 	if (*path == NULL)
 	{
 		if (texture[2] != ' ')
