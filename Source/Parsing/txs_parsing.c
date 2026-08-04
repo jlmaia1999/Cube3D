@@ -90,12 +90,6 @@ int	ft_atoi_rgb(const char *nptr)
 	result = 0;
 	while ((nptr[i] <= 13 && nptr[i] >= 9) || nptr[i] == 32)
 		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			sign = sign * -1;
-		i++;
-	}
 	if (!ft_isdigit(nptr[i]))
 		return (-1);
 	while (ft_isdigit(nptr[i]) == 1)
