@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   txs_extractor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: diomende <diomende@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:36:05 by diogo             #+#    #+#             */
-/*   Updated: 2026/07/31 17:28:25 by diogo            ###   ########.fr       */
+/*   Updated: 2026/08/04 19:24:45 by diomende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ int	sv_hex(char *texture, int *dir)
 	while (texture[i] == ' ')
 		i++;
 	if (!texture[i])
-		return (0);
+		return (1);
 	if (!ft_isdigit(texture[i]))
-		return (0);
-	rgb = ft_split (&texture[i], ',');
-	*dir = rgb_to_hex(rgb);
-	if (*dir == -1)
+		return (1);
+	if (texture[ft_strlen(texture) - 1] == ',')
 	{
-		free_array (rgb);
+		*dir = -1;
 		return (0);
 	}
+	rgb = ft_split (&texture[i], ',');
+	*dir = rgb_to_hex(rgb);
 	free_array (rgb);
 	return (0);
 }
@@ -60,18 +60,19 @@ int	sv_texture(char *texture, char **path)
 	int	i;
 
 	i = 0;
-	if (texture[2] != ' ')
-		return (0);
+
 	if (*path == NULL)
 	{
+		if (texture[2] != ' ')
+			return (1);
 		while (texture[i] != ' ')
 			i++;
 		if (!texture[i])
-			return (0);
+			return (1);
 		while (texture[i] == ' ')
 			i++;
 		if (!texture[i])
-			return (0);
+			return (1);
 		*path = ft_substr (texture, i, ft_strlen(texture));
 		return (0);
 	}
@@ -107,6 +108,9 @@ int	extract_textures2(t_map *map, t_textures *tex, int i)
 
 int	extract_textures(t_master *master)
 {
+	int	i;
+
+	i = 0;
 	if (extract_textures2(master->map, master->textures, 0))
 		return (1);
 	if (!master->textures->t_strings[NO] || !master->textures->\
@@ -117,5 +121,16 @@ ceiling_hex == -2 || master->textures->floor_hex == -2)
 	else if (master->textures->ceiling_hex == -1 || master->\
 textures->floor_hex == -1)
 		return (ft_putstr_fd (ERR_RGB, 2), 1);
+	while (master->map->file[i])
+	{
+		if ((master->map->file[i][0] != 'N' || master->map->file[i][1] != 'O') && (master\
+->map->file[i][0] != 'S' || master->map->file[i][1] != 'O') && (master->\
+map->file[i][0] != 'W' || master->map->file[i][1] != 'E') && (master->\
+map->file[i][0] != 'E' || master->map->file[i][1] != 'A') && (master->\
+map->file[i][0] != 'F' && master->map->file[i][0] != 'C' && master->map->file[i][0] != ' ' \
+&& master->map->file[i][0] != '\n' && master->map->file[i][0] != '1'))
+			return (ft_putstr_fd(ERR_MAP_SHAPE, 2), 1);
+		i++;
+	}
 	return (0);
 }
