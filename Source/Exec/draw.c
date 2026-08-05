@@ -60,7 +60,7 @@ void	draw_ray(t_master *master, float angle, int i)
 	true_distance = distance * cos(angle_diff);
 	if (true_distance < 0.001f)
 		true_distance = 0.001f;
-	height = (int)(((WIDTH / 2.0) / tan(PI/3 / 2.0)) / true_distance);
+	height = (int)(((WIDTH / 2.0) / tan(PI / 3 / 2.0)) / true_distance);
 	draw_tex(master, i, (HEIGHT - height) / 2, (HEIGHT + height) / 2);
 }
 
