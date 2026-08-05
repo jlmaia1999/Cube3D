@@ -15,6 +15,7 @@ SRCS = $(PARSE_DIR)/main.c \
 		$(PARSE_DIR)/map_extractor.c\
 		$(PARSE_DIR)/txs_extractor.c\
 		$(PARSE_DIR)/txs_parsing.c\
+		$(PARSE_DIR)/utils.c\
 		$(SRC_DIR)/cub3d.c\
 		$(EXEC_DIR)/draw.c\
 		$(EXEC_DIR)/mini_map.c\
@@ -28,7 +29,8 @@ SRCS = $(PARSE_DIR)/main.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -O3 -march=native -flto -ftree-vectorize -funroll-loops -ffast-math
+CFLAGS = -Wall -Wextra -Werror -g -O3 -march=native -flto -ftree-vectorize -funroll-loops -ffast-math -Wno-incompatible-pointer-types
+
 MLX_FLAGS = -L$(MINILIBX_DIR) -lmlx -lXext -lX11
 
 all: $(MINILIBX) $(LIBFT)  $(NAME)

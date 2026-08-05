@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joaom <joaom@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 20:39:17 by diogo             #+#    #+#             */
-/*   Updated: 2026/07/14 14:08:37 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/08/05 01:20:56 by joaom            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@
 # define ERR_MAP_SHAPE "Error\nMap shape is invalid or \
 parameters stated incorrectly\n"
 # define ERR_RGB "Error\nInvalid RGB values\n"
-# define ERR_RGB_DUP "Error\nDuplicate RGB reference encountered\n"
-# define ERR_TXS_MISS "Error\nOne or more textures missing\n"
-# define ERR_TXS_DUP "Error\nDuplicate texture reference encountered\n"
+// # define ERR_RGB_DUP "Error\nDuplicate RGB reference encountered\n"
+# define ERR_TXS "Error\nTexture Error\n"
+// # define ERR_TXS_DUP "Error\nDuplicate texture reference encountered\n"
 # define ERR_MAP_ELEM "Error\nMap has 1 or more invalid element/ is \
 missing a starting orientation\n"
 # define ERR_MAP_OPEN "Error\nThe Map must be surrounded by walls and \
@@ -86,5 +86,6 @@ void	draw_tex(t_master *master, int x, int start, int end);
 void	background(t_master *master);
 int		close_game(t_master **master);
 bool	touch(int px, int py, t_master *master);
+int		count_comas(char *texture);
 
 #endif

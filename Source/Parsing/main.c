@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogo <diogo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaom <joaom@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:35:36 by diogo             #+#    #+#             */
-/*   Updated: 2026/05/14 19:46:40 by diogo            ###   ########.fr       */
+/*   Updated: 2026/08/05 01:19:08 by joaom            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	master_init3(t_master **master)
 
 void	master_init2(t_master **master)
 {
-	(*master)->ray = calloc(sizeof(t_ray), 1);
+	(*master)->ray = ft_calloc(sizeof(t_ray), 1);
 	if (!(*master)->ray)
 	{
 		free((*master)->map);

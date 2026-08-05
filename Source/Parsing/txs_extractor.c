@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   txs_extractor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diomende <diomende@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: joaom <joaom@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 19:36:05 by diogo             #+#    #+#             */
-/*   Updated: 2026/08/04 20:22:41 by diomende         ###   ########.fr       */
+/*   Updated: 2026/08/05 01:28:24 by joaom            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	sv_hex(char *texture, int *dir)
 	char	**rgb;
 
 	i = 0;
+	if (count_comas(texture))
+		return (1);
 	if (*dir > 0)
 		return (1);
 	while (texture[i] != ' ' && texture[i])
@@ -84,22 +86,22 @@ int	extract_textures2(t_map *map, t_textures *tex, int i)
 	{
 		if (map->file[i][0] == 'N' && map->file[i][1] == 'O')
 			if (sv_texture(map->file[i], &tex->t_strings[NO]))
-				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
+				return (ft_putstr_fd (ERR_TXS, 2), 1);
 		if (map->file[i][0] == 'S' && map->file[i][1] == 'O')
 			if (sv_texture(map->file[i], &tex->t_strings[SO]))
-				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
+				return (ft_putstr_fd (ERR_TXS, 2), 1);
 		if (map->file[i][0] == 'W' && map->file[i][1] == 'E')
 			if (sv_texture(map->file[i], &tex->t_strings[WE]))
-				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
+				return (ft_putstr_fd (ERR_TXS, 2), 1);
 		if (map->file[i][0] == 'E' && map->file[i][1] == 'A')
 			if (sv_texture(map->file[i], &tex->t_strings[EA]))
-				return (ft_putstr_fd (ERR_TXS_DUP, 2), 1);
-		if (map->file[i][0] == 'F')
+				return (ft_putstr_fd (ERR_TXS, 2), 1);
+		if (map->file[i][0] == 'F' && map->file[i][1] == ' ')
 			if (sv_hex(map->file[i], &tex->floor_hex))
-				return (ft_putstr_fd (ERR_RGB_DUP, 2), 1);
-		if (map->file[i][0] == 'C')
+				return (ft_putstr_fd (ERR_RGB, 2), 1);
+		if (map->file[i][0] == 'C' && map->file[i][1] == ' ')
 			if (sv_hex(map->file[i], &tex->ceiling_hex))
-				return (ft_putstr_fd (ERR_RGB_DUP, 2), 1);
+				return (ft_putstr_fd (ERR_RGB, 2), 1);
 		i++;
 	}
 	return (0);
@@ -116,18 +118,18 @@ int	extract_textures(t_master *master)
 t_strings[SO] || !master->textures->t_strings[EA] || !master->\
 textures->t_strings[WE] || master->textures->\
 ceiling_hex == -2 || master->textures->floor_hex == -2)
-		return (ft_putstr_fd (ERR_TXS_MISS, 2), 1);
+		return (ft_putstr_fd (ERR_TXS, 2), 1);
 	else if (master->textures->ceiling_hex == -1 || master->\
 textures->floor_hex == -1)
 		return (ft_putstr_fd (ERR_RGB, 2), 1);
 	while (master->map->file[i])
 	{
-		if ((master->map->file[i][0] != 'N' || master->map->file[i][1] != 'O') && (master\
-->map->file[i][0] != 'S' || master->map->file[i][1] != 'O') && (master->\
-map->file[i][0] != 'W' || master->map->file[i][1] != 'E') && (master->\
-map->file[i][0] != 'E' || master->map->file[i][1] != 'A') && (master->\
-map->file[i][0] != 'F' && master->map->file[i][0] != 'C' && master->map->file[i][0] != ' ' \
-&& master->map->file[i][0] != '\n' && master->map->file[i][0] != '1'))
+		if ((master->map->file[i][0] != 'N' || master->map->file[i][1] != 'O') \
+&& (master->map->file[i][0] != 'S' || master->map->file[i][1] != 'O') && (master\
+->map->file[i][0] != 'W' || master->map->file[i][1] != 'E') && (master->map->\
+file[i][0] != 'E' || master->map->file[i][1] != 'A') && (master->map->file[i][0] \
+!= 'F' && master->map->file[i][0] != 'C' && master->map->file[i][0] != ' ' && \
+master->map->file[i][0] != '\n' && master->map->file[i][0] != '1'))
 			return (ft_putstr_fd(ERR_MAP_SHAPE, 2), 1);
 		i++;
 	}
