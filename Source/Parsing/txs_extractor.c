@@ -118,7 +118,7 @@ int	extract_textures(t_master *master)
 t_strings[SO] || !master->textures->t_strings[EA] || !master->\
 textures->t_strings[WE] || master->textures->\
 ceiling_hex == -2 || master->textures->floor_hex == -2)
-		return (ft_putstr_fd (ERR_TXS, 2), 1);
+		return (ft_putstr_fd (ERR_MAP_SHAPE, 2), 1);
 	else if (master->textures->ceiling_hex == -1 || master->\
 textures->floor_hex == -1)
 		return (ft_putstr_fd (ERR_RGB, 2), 1);
