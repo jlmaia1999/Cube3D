@@ -6,7 +6,7 @@
 /*   By: joaom <joaom@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 20:39:17 by diogo             #+#    #+#             */
-/*   Updated: 2026/08/05 01:20:56 by joaom            ###   ########.fr       */
+/*   Updated: 2026/08/05 02:24:41 by joaom            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define WIDTH 1280
 # define HEIGHT 720
 
+
 # define W 119
 # define A 97
 # define S 115
@@ -34,6 +35,8 @@
 
 # define PI 3.14159265359
 
+# define FOV PI/3
+# define DIST_PROJ_PLANE ((WIDTH / 2.0) / tan(FOV / 2.0))
 # define BLOCK 64
 
 # define ERR_NO_MAP "Error\nNo map file provided\n"

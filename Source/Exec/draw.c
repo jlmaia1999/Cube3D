@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joaom <joaom@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:40:21 by jomaia            #+#    #+#             */
-/*   Updated: 2026/05/13 14:40:51 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/08/05 02:32:58 by joaom            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,24 @@ void	draw_ray(t_master *master, float angle, int i)
 	true_distance = distance * cos(angle_diff);
 	if (true_distance < 0.001f)
 		true_distance = 0.001f;
-	height = HEIGHT / true_distance;
+	height = (int)(DIST_PROJ_PLANE / true_distance);
 	draw_tex(master, i, (HEIGHT - height) / 2, (HEIGHT + height) / 2);
 }
 
 void	init_rays(t_master *master)
 {
 	int		i;
-	float	start_x;
-	float	fraction;
+	float	camera_x;
+	float	tan_half_fov;
+	float	angle;
 
 	i = 0;
-	fraction = PI / 3 / WIDTH;
-	start_x = master->player->angle - PI / 6;
+	tan_half_fov = tan(PI / 6);
 	while (i < WIDTH)
 	{
-		draw_ray(master, start_x, i);
-		start_x += fraction;
+		camera_x = (2.0f * i / (WIDTH - 1)) - 1.0f;
+		angle = master->player->angle + atan(camera_x * tan_half_fov);
+		draw_ray(master, angle, i);
 		i++;
 	}
 }
